@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+set -eu
+
+PYTHON="${PYTHON:-python}"
+
+"$PYTHON" -m compileall -q -x '(^|/)(\.venv|venv|\.conda|__pycache__|\.git|build|dist)/' .
+
+if [ -d tests ]; then
+    "$PYTHON" -m pytest -q
+else
+    echo "No tests directory found; skipping pytest."
+fi

@@ -1,0 +1,15 @@
+.PHONY: verify test compile
+
+PYTHON ?= python
+
+verify: compile test
+
+test:
+	@if [ -d tests ]; then \
+		$(PYTHON) -m pytest -q; \
+	else \
+		echo "No tests directory found; skipping pytest."; \
+	fi
+
+compile:
+	@$(PYTHON) -m compileall -q -x '(^|/)(\.venv|venv|\.conda|__pycache__|\.git|build|dist)/' .

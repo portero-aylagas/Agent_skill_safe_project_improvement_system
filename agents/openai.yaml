@@ -1,0 +1,6 @@
+interface:
+  display_name: "Safe Project Improvement"
+  short_description: "Safe Python and AI project improvement"
+  default_prompt: "Use $safe-project-improvement-system to inspect this project, add safe verification, and make one small verified improvement."
+policy:
+  allow_implicit_invocation: true
