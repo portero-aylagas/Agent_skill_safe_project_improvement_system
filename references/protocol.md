@@ -83,6 +83,19 @@ Run the agreed verification for the whole relevant repository surface, not only
 the new or focused test. Stop if it fails. Report the failure, what changed, and
 the smallest next diagnostic step.
 
+## Run Artifacts
+
+Use `assets/run-report-template.md` when a run needs a durable audit trail.
+Create a run report when:
+
+- the user asks for an audit log or run artifact
+- the mode is full automation
+- the patch is medium/high risk
+- verification fails
+- the run produces a backlog intended to persist
+
+For low-risk local patches, the final chat report is usually enough.
+
 ## Modes
 
 ### Review Mode

@@ -78,6 +78,8 @@ Use `assets/` as project templates, adapting them to the target repository:
   without live secrets.
 - `behavior-inventory-template.md`: behavior characterization worksheet.
 - `patch-backlog-template.md`: prioritized improvement backlog.
+- `run-report-template.md`: optional audit trail for review, full automation,
+  medium/high-risk patches, verification failures, or persistent backlogs.
 
 ## Default Output
 

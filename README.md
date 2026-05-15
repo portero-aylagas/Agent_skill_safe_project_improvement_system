@@ -60,6 +60,7 @@ In that case, copy and adapt only the files you need:
 - `assets/verify.sh.template` -> `verify.sh`
 - `assets/behavior-inventory-template.md` -> optional working document
 - `assets/patch-backlog-template.md` -> optional working document
+- `assets/run-report-template.md` -> optional run audit artifact
 - hook and CI templates only when explicitly desired
 
 After that, ask the agent to install or adapt those files for the current repo.
@@ -160,6 +161,7 @@ safe_project_improvement_system/
    -> github-actions-verify.template.yaml
    -> behavior-inventory-template.md
    -> patch-backlog-template.md
+   -> run-report-template.md
 ```
 
 ## Modes
@@ -245,6 +247,9 @@ Add characterization tests before risky refactors.
   project has no verification entry point.
 - Use `assets/behavior-inventory-template.md` before risky changes.
 - Use `assets/patch-backlog-template.md` to keep review findings actionable.
+- Use `assets/run-report-template.md` when a review, full automation run,
+  medium/high-risk patch, failed verification, or persistent backlog needs an
+  audit trail.
 - Use hook and CI templates only after explicit user approval.
 - Use `examples/` for copy-paste prompts and expected response shapes.
 

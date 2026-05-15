@@ -19,6 +19,7 @@ REQUIRED_PATHS = [
     "assets/AGENTS.template.md",
     "assets/Makefile.template",
     "assets/verify.sh.template",
+    "assets/run-report-template.md",
     "examples/review-mode.md",
     "examples/local-safe-refactor.md",
     "examples/install-verification.md",
@@ -62,6 +63,13 @@ TESTING_STRATEGY_REQUIREMENTS = [
     "Patch tests prove the intended new behavior introduced by the current patch.",
     "Full verification runs the repository's normal checks after the patch",
     "intentional behavior change that needs a deliberate test update",
+]
+
+RUN_ARTIFACT_REQUIREMENTS = [
+    "Use `assets/run-report-template.md` when a run needs a durable audit trail.",
+    "the mode is full automation",
+    "verification fails",
+    "For low-risk local patches, the final chat report is usually enough.",
 ]
 
 
@@ -128,6 +136,18 @@ def check_testing_strategy_requirements() -> list[str]:
     return errors
 
 
+def check_run_artifact_requirements() -> list[str]:
+    protocol = read_text("references/protocol.md")
+    report_template = read_text("assets/run-report-template.md")
+    errors = []
+    for requirement in RUN_ARTIFACT_REQUIREMENTS:
+        if requirement not in protocol:
+            errors.append(f"protocol missing run artifact requirement: {requirement}")
+    if "## Metadata" not in report_template or "## Verification" not in report_template:
+        errors.append("run report template missing required sections")
+    return errors
+
+
 def check_agents_template_requirements() -> list[str]:
     agents_template = read_text("assets/AGENTS.template.md")
     errors = []
@@ -145,6 +165,7 @@ def main() -> int:
     errors.extend(check_protocol_requirements())
     errors.extend(check_patch_policy_requirements())
     errors.extend(check_testing_strategy_requirements())
+    errors.extend(check_run_artifact_requirements())
     errors.extend(check_agent_policy())
     errors.extend(check_agents_template_requirements())
 
