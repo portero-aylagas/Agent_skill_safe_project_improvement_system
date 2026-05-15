@@ -53,6 +53,13 @@ If the user says audit, review, or planning only, use Review Mode.
 
 Load only the references needed for the current task:
 
+Deep audit references are optional. In review mode, load at most one deep audit
+reference by default. Load both `engineering-audits.md` and
+`ai-workflow-audits.md` only when the repository clearly has both general
+software architecture risks and AI/workflow-specific risks. Do not load deep
+audit references during local safe refactor mode unless the patch directly
+touches that area.
+
 - `references/protocol.md`: read first for the full workflow and mode details.
 - `references/coding-standards.md`: read before editing code or installing
   project-local rules.

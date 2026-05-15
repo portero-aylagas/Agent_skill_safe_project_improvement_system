@@ -77,6 +77,8 @@ RUN_ARTIFACT_REQUIREMENTS = [
 DEEP_AUDIT_REQUIREMENTS = [
     "references/engineering-audits.md",
     "references/ai-workflow-audits.md",
+    "Deep audit references are optional. In review mode, load at most one deep audit",
+    "audit references during local safe refactor mode unless the patch directly",
     "Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.",
     "UI/backend separation: callbacks validate inputs and call clean backend",
 ]

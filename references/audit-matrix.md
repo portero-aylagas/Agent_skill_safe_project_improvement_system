@@ -1,8 +1,9 @@
 # Audit Matrix
 
-Use this matrix to choose relevant audits. Do not run every audit blindly. For a
-deeper review, load `engineering-audits.md` or `ai-workflow-audits.md` only when
-the project needs that detail.
+Use this matrix to choose relevant audits. Do not run every audit blindly. Deep
+audit references are optional; load at most one by default, and load both only
+when the repository clearly combines software architecture risks with
+AI/workflow-specific risks.
 
 ## Python Scripts and Packages
 
