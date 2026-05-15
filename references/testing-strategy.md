@@ -17,6 +17,20 @@ Useful default checks:
 - smoke script for the main workflow
 - lint only when already configured or explicitly added as low-risk setup
 
+## Test Roles
+
+Use tests for three related but different jobs:
+
+- Characterization tests protect existing behavior before medium/high-risk
+  changes.
+- Patch tests prove the intended new behavior introduced by the current patch.
+- Full verification runs the repository's normal checks after the patch to catch
+  regressions outside the focused change.
+
+For refactors, characterization and existing tests should usually keep the same
+expected behavior. For intentional behavior changes, update or add tests only
+when the new expectation is part of the patch.
+
 ## Minimal Python Setup
 
 When no verification exists, add the smallest useful setup:
@@ -74,5 +88,7 @@ If verification fails:
 
 1. Stop.
 2. Identify whether the failure is pre-existing or caused by the patch.
-3. Report the command and failure summary.
-4. Suggest the smallest next diagnostic or fix.
+3. Decide whether the failure is a regression, a pre-existing issue, or an
+   intentional behavior change that needs a deliberate test update.
+4. Report the command and failure summary.
+5. Suggest the smallest next diagnostic or fix.

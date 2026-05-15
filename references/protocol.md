@@ -79,8 +79,9 @@ small enough that failure is easy to understand and revert manually.
 
 ## Step 7: Verify
 
-Run the agreed verification. Stop if it fails. Report the failure, what changed,
-and the smallest next diagnostic step.
+Run the agreed verification for the whole relevant repository surface, not only
+the new or focused test. Stop if it fails. Report the failure, what changed, and
+the smallest next diagnostic step.
 
 ## Modes
 

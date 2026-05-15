@@ -57,6 +57,13 @@ PATCH_POLICY_REQUIREMENTS = [
     "It changes a public API, CLI contract, schema, prompt contract, or persisted",
 ]
 
+TESTING_STRATEGY_REQUIREMENTS = [
+    "Characterization tests protect existing behavior before medium/high-risk",
+    "Patch tests prove the intended new behavior introduced by the current patch.",
+    "Full verification runs the repository's normal checks after the patch",
+    "intentional behavior change that needs a deliberate test update",
+]
+
 
 def read_text(relative_path: str) -> str:
     return (ROOT / relative_path).read_text(encoding="utf-8")
@@ -112,6 +119,15 @@ def check_agent_policy() -> list[str]:
     return []
 
 
+def check_testing_strategy_requirements() -> list[str]:
+    testing_strategy = read_text("references/testing-strategy.md")
+    errors = []
+    for requirement in TESTING_STRATEGY_REQUIREMENTS:
+        if requirement not in testing_strategy:
+            errors.append(f"testing strategy missing requirement: {requirement}")
+    return errors
+
+
 def check_agents_template_requirements() -> list[str]:
     agents_template = read_text("assets/AGENTS.template.md")
     errors = []
@@ -128,6 +144,7 @@ def main() -> int:
     errors.extend(check_canonical_pointers())
     errors.extend(check_protocol_requirements())
     errors.extend(check_patch_policy_requirements())
+    errors.extend(check_testing_strategy_requirements())
     errors.extend(check_agent_policy())
     errors.extend(check_agents_template_requirements())
 
