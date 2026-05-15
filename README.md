@@ -137,6 +137,10 @@ safe_project_improvement_system/
 -> agents/openai.yaml
 -> scripts/
    -> check_consistency.py
+-> examples/
+   -> review-mode.md
+   -> local-safe-refactor.md
+   -> install-verification.md
 -> references/
    -> protocol.md
    -> coding-standards.md
@@ -241,3 +245,4 @@ Add characterization tests before risky refactors.
 - Use `assets/behavior-inventory-template.md` before risky changes.
 - Use `assets/patch-backlog-template.md` to keep review findings actionable.
 - Use hook and CI templates only after explicit user approval.
+- Use `examples/` for copy-paste prompts and expected response shapes.

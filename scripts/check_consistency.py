@@ -19,6 +19,9 @@ REQUIRED_PATHS = [
     "assets/AGENTS.template.md",
     "assets/Makefile.template",
     "assets/verify.sh.template",
+    "examples/review-mode.md",
+    "examples/local-safe-refactor.md",
+    "examples/install-verification.md",
 ]
 
 WORKFLOW_DOCS = [
@@ -39,6 +42,13 @@ PROTOCOL_REQUIREMENTS = [
     "Normal verification must not require live API keys",
     "Do not push, install hooks, or add strict CI unless explicitly authorized",
     "Use fake clients/mocks for AI/API tests.",
+]
+
+PATCH_POLICY_REQUIREMENTS = [
+    "It touches more than 5 files.",
+    "It changes more than 250 non-generated lines.",
+    "It changes dependencies, lockfiles, packaging, or runtime versions.",
+    "It changes a public API, CLI contract, schema, prompt contract, or persisted",
 ]
 
 
@@ -80,12 +90,30 @@ def check_protocol_requirements() -> list[str]:
     return errors
 
 
+def check_patch_policy_requirements() -> list[str]:
+    patch_policy = read_text("references/patch-policy.md")
+    errors = []
+    for requirement in PATCH_POLICY_REQUIREMENTS:
+        if requirement not in patch_policy:
+            errors.append(f"patch policy missing threshold: {requirement}")
+    return errors
+
+
+def check_agent_policy() -> list[str]:
+    agent_config = read_text("agents/openai.yaml")
+    if "allow_implicit_invocation: false" not in agent_config:
+        return ["agents/openai.yaml must keep allow_implicit_invocation: false"]
+    return []
+
+
 def main() -> int:
     errors = []
     errors.extend(check_required_paths())
     errors.extend(check_workflow_phrase())
     errors.extend(check_canonical_pointers())
     errors.extend(check_protocol_requirements())
+    errors.extend(check_patch_policy_requirements())
+    errors.extend(check_agent_policy())
 
     if errors:
         print("Consistency check failed:")
