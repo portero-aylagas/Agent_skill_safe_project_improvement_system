@@ -26,9 +26,18 @@ jobs:
           if [ -f requirements.txt ]; then
             python -m pip install -r requirements.txt
           fi
+          if [ -f requirements-dev.txt ]; then
+            python -m pip install -r requirements-dev.txt
+          fi
+          if [ -f requirements-test.txt ]; then
+            python -m pip install -r requirements-test.txt
+          fi
           if [ -f pyproject.toml ] && grep -q '^\[project\]' pyproject.toml; then
             python -m pip install -e .
           fi
+          # If the target repo has tests but no dependency file installs pytest,
+          # either add pytest to the repo's dev/test dependencies or temporarily
+          # add: python -m pip install pytest
 
       - name: Run verification
         run: make verify

@@ -42,6 +42,20 @@ When no verification exists, add the smallest useful setup:
 
 Do not install hooks or strict CI without explicit approval.
 
+## Test Dependencies
+
+If verification runs `pytest`, make sure the target repository installs it in
+the same place it records other development or test dependencies. Prefer the
+existing project convention:
+
+- `pyproject.toml` development/test optional dependencies
+- `requirements-dev.txt` or `requirements-test.txt`
+- an existing dependency group managed by the project's package tool
+
+For tiny beginner repos with no dependency convention, a CI step that runs
+`python -m pip install pytest` is acceptable as a temporary setup patch. Do not
+silently rely on undeclared local packages.
+
 ## AI/API Tests
 
 Use fake clients or mocks:

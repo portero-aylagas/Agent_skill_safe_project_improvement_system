@@ -1,11 +1,16 @@
 .PHONY: verify test compile
 
-PYTHON ?= python
+PYTHON ?= python3
 
 verify: compile test
 
 test:
 	@if [ -d tests ]; then \
+		$(PYTHON) -c "import pytest" >/dev/null 2>&1 || { \
+			echo "pytest is required because tests/ exists."; \
+			echo "Add pytest to the project's dev/test dependencies, then rerun make verify."; \
+			exit 1; \
+		}; \
 		$(PYTHON) -m pytest -q; \
 	else \
 		echo "No tests directory found; skipping pytest."; \

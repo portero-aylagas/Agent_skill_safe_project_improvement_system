@@ -134,6 +134,7 @@ safe_project_improvement_system/
 -> Makefile
 -> README.md
 -> SKILL.md
+-> .github/workflows/verify.yml
 -> agents/openai.yaml
 -> scripts/
    -> check_consistency.py
@@ -246,3 +247,12 @@ Add characterization tests before risky refactors.
 - Use `assets/patch-backlog-template.md` to keep review findings actionable.
 - Use hook and CI templates only after explicit user approval.
 - Use `examples/` for copy-paste prompts and expected response shapes.
+
+## Test Dependencies
+
+Templates assume the target project declares the dependencies needed by its
+normal verification command. If tests use `pytest`, prefer adding `pytest` to the
+target repo's existing dev/test dependency location, such as `pyproject.toml`,
+`requirements-dev.txt`, or a test extra. For very small beginner repos without a
+dependency convention, adding `python -m pip install pytest` to CI is acceptable
+as a temporary fallback.

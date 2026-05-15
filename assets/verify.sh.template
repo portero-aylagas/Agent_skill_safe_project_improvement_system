@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-PYTHON="${PYTHON:-python}"
+PYTHON="${PYTHON:-python3}"
 
 "$PYTHON" -m compileall -q -x '(^|/)(\.venv|venv|\.conda|__pycache__|\.git|build|dist)/' .
 
