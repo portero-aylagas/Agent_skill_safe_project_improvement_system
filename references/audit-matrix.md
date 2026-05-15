@@ -1,6 +1,8 @@
 # Audit Matrix
 
-Use this matrix to choose relevant audits. Do not run every audit blindly.
+Use this matrix to choose relevant audits. Do not run every audit blindly. For a
+deeper review, load `engineering-audits.md` or `ai-workflow-audits.md` only when
+the project needs that detail.
 
 ## Python Scripts and Packages
 
@@ -10,12 +12,15 @@ Use this matrix to choose relevant audits. Do not run every audit blindly.
 - Errors: clear exceptions, no swallowed failures, useful messages.
 - Data handling: schemas, file paths, encoding, input validation.
 - Verification: compile/import checks, pytest, smoke tests.
+- Documentation: clear run command, sample input, expected output, limitations,
+  and fallback behavior when needed for review or demo.
 
 ## AI Integration Projects
 
 - Provider boundary: one place for model/API calls.
 - Credentials: no required live keys for tests, no secrets committed.
 - Prompt quality: named prompts, versionable text, clear inputs/outputs.
+- Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.
 - Determinism: configurable temperature, stable fake-client tests.
 - Failure modes: rate limits, timeouts, empty responses, malformed JSON.
 - Cost and safety: token limits, retries, logging without sensitive data.
@@ -41,6 +46,8 @@ Use this matrix to choose relevant audits. Do not run every audit blindly.
 ## UI Projects
 
 - Main user workflows and state transitions.
+- UI/backend separation: callbacks validate inputs and call clean backend
+  functions.
 - Form validation and error display.
 - Accessibility basics: labels, keyboard paths, contrast.
 - Responsive layout for important views.

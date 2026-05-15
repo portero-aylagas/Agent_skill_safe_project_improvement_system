@@ -13,6 +13,8 @@ REQUIRED_PATHS = [
     "agents/openai.yaml",
     "scripts/check_consistency.py",
     "references/protocol.md",
+    "references/engineering-audits.md",
+    "references/ai-workflow-audits.md",
     "references/patch-policy.md",
     "references/testing-strategy.md",
     "references/ai-integration-quality.md",
@@ -70,6 +72,13 @@ RUN_ARTIFACT_REQUIREMENTS = [
     "the mode is full automation",
     "verification fails",
     "For low-risk local patches, the final chat report is usually enough.",
+]
+
+DEEP_AUDIT_REQUIREMENTS = [
+    "references/engineering-audits.md",
+    "references/ai-workflow-audits.md",
+    "Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.",
+    "UI/backend separation: callbacks validate inputs and call clean backend",
 ]
 
 
@@ -148,6 +157,22 @@ def check_run_artifact_requirements() -> list[str]:
     return errors
 
 
+def check_deep_audit_requirements() -> list[str]:
+    skill = read_text("SKILL.md")
+    audit_matrix = read_text("references/audit-matrix.md")
+    engineering = read_text("references/engineering-audits.md")
+    ai_workflow = read_text("references/ai-workflow-audits.md")
+    errors = []
+    for requirement in DEEP_AUDIT_REQUIREMENTS:
+        if requirement not in skill and requirement not in audit_matrix:
+            errors.append(f"missing deep audit requirement: {requirement}")
+    if "## Error Handling" not in engineering or "## Testability" not in engineering:
+        errors.append("engineering audits missing core sections")
+    if "## Prompt Quality" not in ai_workflow or "## RAG And Retrieval" not in ai_workflow:
+        errors.append("AI workflow audits missing core sections")
+    return errors
+
+
 def check_agents_template_requirements() -> list[str]:
     agents_template = read_text("assets/AGENTS.template.md")
     errors = []
@@ -166,6 +191,7 @@ def main() -> int:
     errors.extend(check_patch_policy_requirements())
     errors.extend(check_testing_strategy_requirements())
     errors.extend(check_run_artifact_requirements())
+    errors.extend(check_deep_audit_requirements())
     errors.extend(check_agent_policy())
     errors.extend(check_agents_template_requirements())
 

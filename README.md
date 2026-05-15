@@ -148,6 +148,8 @@ safe_project_improvement_system/
    -> coding-standards.md
    -> characterization.md
    -> audit-matrix.md
+   -> engineering-audits.md
+   -> ai-workflow-audits.md
    -> patch-policy.md
    -> testing-strategy.md
    -> ai-integration-quality.md

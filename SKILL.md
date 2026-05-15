@@ -59,6 +59,11 @@ Load only the references needed for the current task:
 - `references/characterization.md`: read before medium/high-risk changes or
   when current behavior is unclear.
 - `references/audit-matrix.md`: read for review/audit/backlog work.
+- `references/engineering-audits.md`: read when review mode needs deeper
+  architecture, error handling, testability, validation, documentation, hygiene,
+  UI separation, or security checks.
+- `references/ai-workflow-audits.md`: read when review mode needs deeper prompt,
+  structured output, RAG, agent/tool, speech, cost, or workflow automation checks.
 - `references/patch-policy.md`: read before making code changes.
 - `references/testing-strategy.md`: read when adding or repairing verification.
 - `references/ai-integration-quality.md`: read for prompts, providers, APIs,
