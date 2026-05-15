@@ -34,6 +34,12 @@ WORKFLOW_DOCS = [
 CANONICAL_POINTER_DOCS = [
     "README.md",
     "SKILL.md",
+    "assets/AGENTS.template.md",
+]
+
+AGENTS_TEMPLATE_REQUIREMENTS = [
+    "Default to beginner/intermediate-friendly code unless this repository already",
+    "Use `references/patch-policy.md` for patch-size thresholds and split criteria.",
 ]
 
 PROTOCOL_REQUIREMENTS = [
@@ -106,6 +112,15 @@ def check_agent_policy() -> list[str]:
     return []
 
 
+def check_agents_template_requirements() -> list[str]:
+    agents_template = read_text("assets/AGENTS.template.md")
+    errors = []
+    for requirement in AGENTS_TEMPLATE_REQUIREMENTS:
+        if requirement not in agents_template:
+            errors.append(f"AGENTS template missing requirement: {requirement}")
+    return errors
+
+
 def main() -> int:
     errors = []
     errors.extend(check_required_paths())
@@ -114,6 +129,7 @@ def main() -> int:
     errors.extend(check_protocol_requirements())
     errors.extend(check_patch_policy_requirements())
     errors.extend(check_agent_policy())
+    errors.extend(check_agents_template_requirements())
 
     if errors:
         print("Consistency check failed:")

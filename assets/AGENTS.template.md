@@ -2,9 +2,14 @@
 
 Use these rules when modifying this repository.
 
+`references/protocol.md` is the canonical workflow for the safe project
+improvement system. This file is a repo-local summary; if the two disagree,
+follow the protocol.
+
 ## Default Code Style
 
-- Write beginner/intermediate-friendly code.
+- Default to beginner/intermediate-friendly code unless this repository already
+  has stronger conventions.
 - Follow PEP8.
 - Use Google-style docstrings for public modules, classes, and functions.
 - Add type hints at public boundaries and important data structures.
@@ -33,6 +38,7 @@ Make one focused patch at a time. Do not combine:
 - cleanup
 
 Stop after the patch and verification unless the user asks for the next patch.
+Use `references/patch-policy.md` for patch-size thresholds and split criteria.
 
 ## Characterization
 
