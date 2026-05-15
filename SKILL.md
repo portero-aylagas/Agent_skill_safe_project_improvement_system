@@ -18,6 +18,9 @@ loop is:
 inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> verify
 ```
 
+`references/protocol.md` is the authoritative workflow for this skill. The
+sections below are a compact operating summary for agent use.
+
 Do not begin with refactoring. First understand the project, current behavior,
 verification surface, and risks.
 

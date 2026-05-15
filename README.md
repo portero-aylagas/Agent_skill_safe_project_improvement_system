@@ -9,6 +9,9 @@ The default workflow is:
 inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> verify
 ```
 
+`references/protocol.md` is the canonical workflow. This README is a quick
+start; if the two ever disagree, update the README to match the protocol.
+
 Default code style:
 
 ```text
@@ -128,9 +131,12 @@ If you want the target repo to be self-contained for Claude Code, install
 
 ```text
 safe_project_improvement_system/
+-> Makefile
 -> README.md
 -> SKILL.md
 -> agents/openai.yaml
+-> scripts/
+   -> check_consistency.py
 -> references/
    -> protocol.md
    -> coding-standards.md
@@ -153,42 +159,30 @@ safe_project_improvement_system/
 
 ## Modes
 
-### Review Mode
-
-Inspect, characterize, audit, and produce a prioritized backlog. Do not edit code.
-
-Use this mode when the user asks for an audit, review, assessment, plan, backlog,
-or risk analysis.
-
-### Local Safe Refactor Mode
-
-Create or confirm verification, add characterization, apply one small patch, run
-local verification, then stop.
-
-This is the default when the user asks to refactor or improve code unless they
-explicitly request audit/review only.
-
-### Full Automation Mode
-
-Create a branch, add verification, add tests, patch, commit, push, wait for CI,
-and report.
-
-This mode requires explicit user approval because it can affect branches, remote
-state, hooks, and CI.
+- **Review Mode**: inspect, characterize, audit, and produce a prioritized
+  backlog. Do not edit code.
+- **Local Safe Refactor Mode**: confirm verification and characterization, apply
+  one small patch, run verification, then stop.
+- **Full Automation Mode**: branch, verify, patch, commit, push, and wait for CI
+  only after explicit user approval.
 
 ## Required Rules
 
-- Use one lead agent for edits.
-- Do not start by refactoring.
-- Always inspect the project first.
-- Always create or identify characterization before medium/high-risk changes.
-- Every code-changing patch needs verification.
-- Do not combine refactor, feature change, dependency change, UI change, and
-  cleanup in one patch.
-- Do not push, install hooks, or add strict CI unless explicitly authorized.
-- Use fake clients/mocks for AI/API tests.
-- Normal verification must not require live API keys.
-- Stop if verification fails.
+Follow `references/protocol.md` for the complete required rules. The shortest
+version is: inspect first, characterize before medium/high-risk changes, make
+one focused patch, verify it locally, avoid live API keys by default, and do not
+push, install hooks, or add strict CI without explicit approval.
+
+## Repository Verification
+
+This repository verifies itself with:
+
+```text
+make verify
+```
+
+The root verification compiles local scripts and checks that the key docs still
+point back to the canonical protocol.
 
 ## Patch Risk Policy
 

@@ -8,6 +8,19 @@ Use this protocol for safe project improvement with one lead editing agent.
 inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> verify
 ```
 
+## Non-Negotiable Rules
+
+- Use one lead agent for edits.
+- Always inspect the project before changing it.
+- Characterization is mandatory before medium/high-risk changes.
+- Every code-changing patch needs verification.
+- Do not combine refactor, feature change, dependency change, UI change, and
+  cleanup in one patch.
+- Do not push, install hooks, or add strict CI unless explicitly authorized.
+- Use fake clients/mocks for AI/API tests.
+- Normal verification must not require live API keys.
+- Stop if verification fails.
+
 ## Step 1: Inspect
 
 Identify:
