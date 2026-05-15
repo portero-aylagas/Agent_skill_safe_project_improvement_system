@@ -16,10 +16,6 @@ Beginner/intermediate-friendly, PEP8, Google-style docstrings, type hints at
 boundaries, clear inline workflow comments, small maintainable changes.
 ```
 
-This system is not Obsidian-first and does not assume notebooks, Gradio, n8n, or
-bootcamp scaffolding. Those can be supported as optional adapters when the target
-project actually uses them.
-
 ## How To Use
 
 You can use this system in two ways:
