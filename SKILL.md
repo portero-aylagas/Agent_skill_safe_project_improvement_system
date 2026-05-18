@@ -24,6 +24,21 @@ sections below are a compact operating summary for agent use.
 Do not begin with refactoring. First understand the project, current behavior,
 verification surface, and risks.
 
+## Adoption Context
+
+This skill may be used from a shared external repository, from a small repo-local
+guidance install, or from a vendored full copy under a target repository such as
+`skills/safe_project_improvement_system/`.
+
+Installing a few templates is not the same as vendoring the full skill bundle.
+
+If the target repository already has `AGENTS.md`, `Makefile`, `verify.sh`, or
+similar local files, merge carefully instead of overwriting them.
+
+When the skill is vendored into another repository for traceability, it is
+usually a `development/support skill`, not a runtime/project skill, unless that
+repository explicitly integrates it into runtime behavior.
+
 ## Mode Selection
 
 - **Review Mode**: inspect, characterize, audit, and produce a prioritized
@@ -83,6 +98,8 @@ touches that area.
 Use `assets/` as project templates, adapting them to the target repository:
 
 - `AGENTS.template.md`: project-local agent rules.
+- `development-skill-note.template.md`: local note for repositories that need
+  to document this system as a development/support skill.
 - `Makefile.template` and `verify.sh.template`: minimal local verification.
 - `pyproject.template.toml`: beginner-friendly pytest/ruff defaults.
 - `pre-commit-config.template.yaml`: low-risk hooks with optional ruff.
