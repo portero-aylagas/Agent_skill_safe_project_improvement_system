@@ -13,8 +13,18 @@ follow the protocol.
 - Follow PEP8.
 - Use Google-style docstrings for public modules, classes, and functions.
 - Add type hints at public boundaries and important data structures.
-- Keep inline workflow comments clear and rare.
+- Use comments as a comprehension tool for workflow intent, assumptions, side
+  effects, safety constraints, and non-obvious guards.
 - Prefer small maintainable changes over broad rewrites.
+
+## Implementation Definition Of Done
+
+Public modules, classes, and functions should have concise Google-style
+docstrings unless they are clearly private or internal.
+
+Code should be beginner/intermediate-friendly: clear names, simple control flow,
+explicit side effects, understandable module boundaries, and comments where they
+reduce the reader's cognitive load.
 
 ## Safe Improvement Workflow
 

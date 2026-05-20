@@ -43,6 +43,7 @@ CANONICAL_POINTER_DOCS = [
 AGENTS_TEMPLATE_REQUIREMENTS = [
     "Default to beginner/intermediate-friendly code unless this repository already",
     "Use `references/patch-policy.md` for patch-size thresholds and split criteria.",
+    "Public modules, classes, and functions should have concise Google-style",
 ]
 
 PROTOCOL_REQUIREMENTS = [
@@ -51,6 +52,15 @@ PROTOCOL_REQUIREMENTS = [
     "Normal verification must not require live API keys",
     "Do not push, install hooks, or add strict CI unless explicitly authorized",
     "Use fake clients/mocks for AI/API tests.",
+    "When reviewing software engineering quality, assess conformance to",
+    "`references/coding-standards.md`",
+]
+
+CODING_STANDARDS_REQUIREMENTS = [
+    "Use these standards when reviewing, editing, refactoring, or installing",
+    "Implementation work should be beginner/intermediate-friendly",
+    "Use comments as a comprehension tool, not decoration.",
+    "Include public module, class, and function docstrings in software engineering",
 ]
 
 PATCH_POLICY_REQUIREMENTS = [
@@ -77,7 +87,11 @@ RUN_ARTIFACT_REQUIREMENTS = [
 DEEP_AUDIT_REQUIREMENTS = [
     "references/engineering-audits.md",
     "references/ai-workflow-audits.md",
-    "Deep audit references are optional. In review mode, load at most one deep audit",
+    "references/coding-standards.md",
+    "Review mode always loads `references/protocol.md`",
+    "Deep audit references are optional. In review mode, load",
+    "AI/workflow references only when the repository",
+    "except where the protocol requires one for the",
     "audit references during local safe refactor mode unless the patch directly",
     "Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.",
     "UI/backend separation: callbacks validate inputs and call clean backend",
@@ -119,6 +133,15 @@ def check_protocol_requirements() -> list[str]:
     for requirement in PROTOCOL_REQUIREMENTS:
         if requirement not in protocol:
             errors.append(f"protocol missing requirement: {requirement}")
+    return errors
+
+
+def check_coding_standards_requirements() -> list[str]:
+    coding_standards = read_text("references/coding-standards.md")
+    errors = []
+    for requirement in CODING_STANDARDS_REQUIREMENTS:
+        if requirement not in coding_standards:
+            errors.append(f"coding standards missing requirement: {requirement}")
     return errors
 
 
@@ -190,6 +213,7 @@ def main() -> int:
     errors.extend(check_workflow_phrase())
     errors.extend(check_canonical_pointers())
     errors.extend(check_protocol_requirements())
+    errors.extend(check_coding_standards_requirements())
     errors.extend(check_patch_policy_requirements())
     errors.extend(check_testing_strategy_requirements())
     errors.extend(check_run_artifact_requirements())

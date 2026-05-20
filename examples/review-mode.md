@@ -13,6 +13,7 @@ Do not edit files.
 - Mode used: review mode.
 - Files changed: none.
 - Current behavior summary: entry points, verification, tests, config, live-service boundaries.
-- Audit findings: prioritized by risk and user-visible impact.
+- Audit findings: prioritized by risk and user-visible impact, including coding
+  standards conformance for software engineering quality reviews.
 - Backlog: small patch candidates with likely files, risk level, characterization need, and verification command.
 - Stopped work: any changes that require explicit approval.

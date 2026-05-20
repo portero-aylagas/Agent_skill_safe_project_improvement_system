@@ -68,16 +68,21 @@ If the user says audit, review, or planning only, use Review Mode.
 
 Load only the references needed for the current task:
 
-Deep audit references are optional. In review mode, load at most one deep audit
-reference by default. Load both `engineering-audits.md` and
-`ai-workflow-audits.md` only when the repository clearly has both general
-software architecture risks and AI/workflow-specific risks. Do not load deep
-audit references during local safe refactor mode unless the patch directly
+Review mode always loads `references/protocol.md`,
+`references/audit-matrix.md`, and `references/coding-standards.md`.
+
+Deep audit references are optional. In review mode, load
+`references/engineering-audits.md` for software engineering quality reviews. Load
+`references/ai-workflow-audits.md` or `references/ai-integration-quality.md` for
+AI, API, prompt, RAG, tool, agent, or workflow repositories. Load both
+engineering and AI/workflow references only when the repository clearly has both
+general software architecture risks and AI/workflow-specific risks. Do not load
+deep audit references during local safe refactor mode unless the patch directly
 touches that area.
 
 - `references/protocol.md`: read first for the full workflow and mode details.
-- `references/coding-standards.md`: read before editing code or installing
-  project-local rules.
+- `references/coding-standards.md`: read before reviewing, editing,
+  refactoring, or installing project-local rules.
 - `references/characterization.md`: read before medium/high-risk changes or
   when current behavior is unclear.
 - `references/audit-matrix.md`: read for review/audit/backlog work.
@@ -92,6 +97,15 @@ touches that area.
   RAG, tools, agents, or evaluation.
 - `references/branching-ci-hooks.md`: read only for explicit branch, hook, CI,
   commit, push, or full automation requests.
+
+## Implementation Definition Of Done
+
+For implementation work, public modules, classes, and functions should have
+concise Google-style docstrings unless they are clearly private or internal.
+
+Code should be beginner/intermediate-friendly: clear names, simple control flow,
+explicit side effects, understandable module boundaries, and comments where they
+reduce the reader's cognitive load.
 
 ## Assets
 

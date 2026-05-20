@@ -27,6 +27,10 @@ Check:
 - each function has one clear responsibility
 - names match behavior
 - inputs, outputs, and side effects are understandable
+- public functions and classes have concise Google-style docstrings unless they
+  are clearly private or internal
+- comments explain workflow intent, assumptions, side effects, safety
+  constraints, or non-obvious guards where code alone is not enough
 - UI, file I/O, API calls, and business logic are not unnecessarily mixed
 - functions are not too large, too tiny to be useful, or coupled to global state
 
@@ -116,6 +120,9 @@ Check:
 
 - clear project goal, setup, run command, and verification command
 - required environment variables with examples, not real secrets
+- public module, class, and function docstrings that explain purpose, inputs,
+  outputs, side effects, and important assumptions where useful
+- inline workflow comments that reduce cognitive load without restating syntax
 - project structure and important modules explained where useful
 - sample input, expected output, known limitations, and fallback behavior for
   API, file, or input failure when needed for review or demo

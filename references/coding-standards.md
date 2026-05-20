@@ -1,7 +1,7 @@
 # Coding Standards
 
-Use these standards when editing project code or installing project-local agent
-rules.
+Use these standards when reviewing, editing, refactoring, or installing
+project-local agent rules.
 
 ## Style
 
@@ -14,6 +14,21 @@ rules.
 - Keep internal helper annotations practical, not noisy.
 - Use clear inline workflow comments only where they reduce cognitive load.
 - Preserve existing project conventions when they are reasonable.
+
+## Readability Definition Of Done
+
+Implementation work should be beginner/intermediate-friendly:
+
+- public modules, classes, and functions have concise Google-style docstrings
+  unless they are clearly private or internal
+- names describe domain behavior instead of hiding it behind generic terms
+- control flow is simple enough to scan without tracing every branch
+- side effects such as file I/O, network calls, environment reads, mutation, and
+  persistence are explicit at the module or function boundary
+- module responsibilities are understandable without reverse-engineering the
+  whole project
+- comments explain intent, workflow, assumptions, side effects, or safety
+  constraints when the code alone would make a future reader work too hard
 
 ## Design
 
@@ -35,6 +50,26 @@ rules.
 
 ## Documentation
 
+- Treat code documentation as part of engineering quality, not just README
+  polish.
+- Include public module, class, and function docstrings in software engineering
+  quality reviews.
 - Document how to run verification.
 - Document required environment variables with examples, not real secrets.
 - Keep README updates factual and close to the changed behavior.
+
+## Comments
+
+Use comments as a comprehension tool, not decoration.
+
+Prefer comments when they help a future reader quickly understand:
+
+- what a block is responsible for
+- why an approach exists
+- what assumptions the code depends on
+- what side effects happen
+- what must stay true for the code to be safe or correct
+- how a workflow step fits into the larger process
+- why an edge case, fallback, or guard exists
+
+Avoid comments that merely restate obvious syntax.

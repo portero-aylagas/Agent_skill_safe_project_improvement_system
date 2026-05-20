@@ -1,8 +1,9 @@
 # Audit Matrix
 
 Use this matrix to choose relevant audits. Do not run every audit blindly. Deep
-audit references are optional; load at most one by default, and load both only
-when the repository clearly combines software architecture risks with
+audit references are optional, except where the protocol requires one for the
+review type. Load both engineering and AI/workflow deep references only when the
+repository clearly combines software architecture risks with
 AI/workflow-specific risks.
 
 ## Python Scripts and Packages
@@ -13,7 +14,8 @@ AI/workflow-specific risks.
 - Errors: clear exceptions, no swallowed failures, useful messages.
 - Data handling: schemas, file paths, encoding, input validation.
 - Verification: compile/import checks, pytest, smoke tests.
-- Documentation: clear run command, sample input, expected output, limitations,
+- Documentation: public module/class/function docstrings, comments that reduce
+  cognitive load, clear run command, sample input, expected output, limitations,
   and fallback behavior when needed for review or demo.
 
 ## AI Integration Projects

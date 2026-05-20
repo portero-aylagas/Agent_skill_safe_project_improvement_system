@@ -61,6 +61,8 @@ require live API keys.
 
 Run only audits relevant to the project. Use `audit-matrix.md` to choose checks.
 Record findings as backlog items with risk, expected behavior, and verification.
+When reviewing software engineering quality, assess conformance to
+`coding-standards.md`; it is the source of truth for code-level standards.
 
 ## Step 5: Backlog
 
@@ -101,6 +103,17 @@ For low-risk local patches, the final chat report is usually enough.
 ### Review Mode
 
 Use when the user asks for audit, review, assessment, backlog, or planning.
+
+Always load:
+
+- `references/protocol.md`
+- `references/audit-matrix.md`
+- `references/coding-standards.md`
+
+For software engineering quality reviews, also load
+`references/engineering-audits.md`. For AI/API/workflow repositories, also load
+`references/ai-workflow-audits.md` or
+`references/ai-integration-quality.md`.
 
 Allowed:
 
