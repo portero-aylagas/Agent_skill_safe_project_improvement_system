@@ -12,11 +12,19 @@ inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> veri
 `references/protocol.md` is the canonical workflow. This README is a quick
 start; if the two ever disagree, update the README to match the protocol.
 
-Default code style:
+Default code style and linting:
 
 ```text
 Beginner/intermediate-friendly, PEP8, Google-style docstrings, type hints at
-boundaries, clear inline workflow comments, small maintainable changes.
+boundaries, clear inline workflow comments, small maintainable changes, Ruff
+with pydocstyle for public docstrings.
+```
+
+Development verification:
+
+```text
+python -m pip install -r requirements-dev.txt
+make verify
 ```
 
 ## Adoption Modes
@@ -186,6 +194,8 @@ safe_project_improvement_system/
 -> Makefile
 -> README.md
 -> SKILL.md
+-> pyproject.toml
+-> requirements-dev.txt
 -> .github/workflows/verify.yml
 -> agents/openai.yaml
 -> scripts/

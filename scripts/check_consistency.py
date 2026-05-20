@@ -10,6 +10,8 @@ REQUIRED_PATHS = [
     "Makefile",
     "README.md",
     "SKILL.md",
+    "pyproject.toml",
+    "requirements-dev.txt",
     "agents/openai.yaml",
     "scripts/check_consistency.py",
     "references/protocol.md",
@@ -61,6 +63,7 @@ CODING_STANDARDS_REQUIREMENTS = [
     "Implementation work should be beginner/intermediate-friendly",
     "Use comments as a comprehension tool, not decoration.",
     "Include public module, class, and function docstrings in software engineering",
+    "Prefer Ruff pydocstyle checks for gradual enforcement",
 ]
 
 PATCH_POLICY_REQUIREMENTS = [
@@ -72,6 +75,7 @@ PATCH_POLICY_REQUIREMENTS = [
 
 TESTING_STRATEGY_REQUIREMENTS = [
     "Characterization tests protect existing behavior before medium/high-risk",
+    "Ruff linting, including configured pydocstyle checks for public docstrings",
     "Patch tests prove the intended new behavior introduced by the current patch.",
     "Full verification runs the repository's normal checks after the patch",
     "intentional behavior change that needs a deliberate test update",
@@ -99,10 +103,23 @@ DEEP_AUDIT_REQUIREMENTS = [
 
 
 def read_text(relative_path: str) -> str:
+    """Read a repository file as UTF-8 text.
+
+    Args:
+        relative_path: Path relative to the repository root.
+
+    Returns:
+        File contents decoded as UTF-8 text.
+    """
     return (ROOT / relative_path).read_text(encoding="utf-8")
 
 
 def check_required_paths() -> list[str]:
+    """Check that required skill files exist.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     errors = []
     for relative_path in REQUIRED_PATHS:
         if not (ROOT / relative_path).is_file():
@@ -111,6 +128,11 @@ def check_required_paths() -> list[str]:
 
 
 def check_workflow_phrase() -> list[str]:
+    """Check that summary docs keep the canonical workflow phrase.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     errors = []
     for relative_path in WORKFLOW_DOCS:
         if WORKFLOW not in read_text(relative_path):
@@ -119,6 +141,11 @@ def check_workflow_phrase() -> list[str]:
 
 
 def check_canonical_pointers() -> list[str]:
+    """Check that summary docs point readers back to the protocol.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     errors = []
     for relative_path in CANONICAL_POINTER_DOCS:
         text = read_text(relative_path)
@@ -128,6 +155,11 @@ def check_canonical_pointers() -> list[str]:
 
 
 def check_protocol_requirements() -> list[str]:
+    """Check that the protocol keeps core safety requirements.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     protocol = read_text("references/protocol.md")
     errors = []
     for requirement in PROTOCOL_REQUIREMENTS:
@@ -137,6 +169,11 @@ def check_protocol_requirements() -> list[str]:
 
 
 def check_coding_standards_requirements() -> list[str]:
+    """Check that coding standards keep review and readability rules.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     coding_standards = read_text("references/coding-standards.md")
     errors = []
     for requirement in CODING_STANDARDS_REQUIREMENTS:
@@ -146,6 +183,11 @@ def check_coding_standards_requirements() -> list[str]:
 
 
 def check_patch_policy_requirements() -> list[str]:
+    """Check that patch-policy thresholds remain documented.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     patch_policy = read_text("references/patch-policy.md")
     errors = []
     for requirement in PATCH_POLICY_REQUIREMENTS:
@@ -155,6 +197,11 @@ def check_patch_policy_requirements() -> list[str]:
 
 
 def check_agent_policy() -> list[str]:
+    """Check that the OpenAI agent config keeps implicit invocation disabled.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     agent_config = read_text("agents/openai.yaml")
     if "allow_implicit_invocation: false" not in agent_config:
         return ["agents/openai.yaml must keep allow_implicit_invocation: false"]
@@ -162,6 +209,11 @@ def check_agent_policy() -> list[str]:
 
 
 def check_testing_strategy_requirements() -> list[str]:
+    """Check that the testing strategy keeps its core test categories.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     testing_strategy = read_text("references/testing-strategy.md")
     errors = []
     for requirement in TESTING_STRATEGY_REQUIREMENTS:
@@ -171,6 +223,11 @@ def check_testing_strategy_requirements() -> list[str]:
 
 
 def check_run_artifact_requirements() -> list[str]:
+    """Check that run artifact guidance and template sections stay present.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     protocol = read_text("references/protocol.md")
     report_template = read_text("assets/run-report-template.md")
     errors = []
@@ -183,6 +240,11 @@ def check_run_artifact_requirements() -> list[str]:
 
 
 def check_deep_audit_requirements() -> list[str]:
+    """Check that deep audit loading rules and core sections stay present.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     skill = read_text("SKILL.md")
     audit_matrix = read_text("references/audit-matrix.md")
     engineering = read_text("references/engineering-audits.md")
@@ -199,6 +261,11 @@ def check_deep_audit_requirements() -> list[str]:
 
 
 def check_agents_template_requirements() -> list[str]:
+    """Check that installed agent rules keep key local guidance.
+
+    Returns:
+        Human-readable consistency errors.
+    """
     agents_template = read_text("assets/AGENTS.template.md")
     errors = []
     for requirement in AGENTS_TEMPLATE_REQUIREMENTS:
@@ -208,6 +275,11 @@ def check_agents_template_requirements() -> list[str]:
 
 
 def main() -> int:
+    """Run all repository consistency checks.
+
+    Returns:
+        Process exit code: 0 when checks pass, 1 when any check fails.
+    """
     errors = []
     errors.extend(check_required_paths())
     errors.extend(check_workflow_phrase())

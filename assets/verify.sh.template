@@ -5,6 +5,12 @@ PYTHON="${PYTHON:-python3}"
 
 "$PYTHON" -m compileall -q -x '(^|/)(\.venv|venv|\.conda|__pycache__|\.git|build|dist)/' .
 
+"$PYTHON" -c "import ruff" >/dev/null 2>&1 || {
+    echo "ruff is required. Install it with: python -m pip install ruff"
+    exit 1
+}
+"$PYTHON" -m ruff check .
+
 if [ -d tests ]; then
     "$PYTHON" -m pytest -q
 else

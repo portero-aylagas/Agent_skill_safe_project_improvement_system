@@ -54,6 +54,8 @@ Implementation work should be beginner/intermediate-friendly:
   polish.
 - Include public module, class, and function docstrings in software engineering
   quality reviews.
+- Prefer Ruff pydocstyle checks for gradual enforcement when the repository can
+  adopt them without a large unrelated cleanup.
 - Document how to run verification.
 - Document required environment variables with examples, not real secrets.
 - Keep README updates factual and close to the changed behavior.

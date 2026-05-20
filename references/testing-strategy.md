@@ -13,9 +13,11 @@ make verify
 Useful default checks:
 
 - compile/import check
+- Ruff linting, including configured pydocstyle checks for public docstrings
 - focused pytest suite
 - smoke script for the main workflow
-- lint only when already configured or explicitly added as low-risk setup
+- additional lint only when already configured or explicitly added as low-risk
+  setup
 
 ## Test Roles
 
@@ -37,7 +39,7 @@ When no verification exists, add the smallest useful setup:
 
 - `Makefile` with `verify`, `test`, and `compile`
 - optional `scripts/verify.sh`
-- optional `pyproject.toml` pytest defaults
+- optional `pyproject.toml` pytest and Ruff defaults
 - focused tests under `tests/`
 
 Do not install hooks or strict CI without explicit approval.

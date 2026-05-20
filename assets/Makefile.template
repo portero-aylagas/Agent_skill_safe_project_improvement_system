@@ -1,8 +1,8 @@
-.PHONY: verify test compile
+.PHONY: verify test compile lint
 
 PYTHON ?= python3
 
-verify: compile test
+verify: compile lint test
 
 test:
 	@if [ -d tests ]; then \
@@ -18,3 +18,10 @@ test:
 
 compile:
 	@$(PYTHON) -m compileall -q -x '(^|/)(\.venv|venv|\.conda|__pycache__|\.git|build|dist)/' .
+
+lint:
+	@$(PYTHON) -c "import ruff" >/dev/null 2>&1 || { \
+		echo "ruff is required. Install it with: python -m pip install ruff"; \
+		exit 1; \
+	}
+	@$(PYTHON) -m ruff check .
