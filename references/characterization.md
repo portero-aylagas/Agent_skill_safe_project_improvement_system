@@ -2,6 +2,16 @@
 
 Characterization captures what the project currently does before changing it.
 
+Characterization tests, also known as Golden Master or Snapshot tests, are
+automated tests that record the exact, actual behavior of existing software.
+Michael Feathers coined the term in *Working Effectively with Legacy Code*.
+
+Their purpose is to freeze legacy behavior before refactoring, not to prove that
+the behavior is correct. This matters because safe refactoring needs a safety
+net: if an edit changes observable output, side effects, errors, files, logs, or
+API responses unexpectedly, characterization tests fail before the change reaches
+production.
+
 ## Rule
 
 Characterization is mandatory before medium/high-risk changes.
