@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = "inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> verify"
 
 REQUIRED_PATHS = [
+    ".github/workflows/verify.yml",
+    ".gitignore",
     "Makefile",
     "README.md",
     "SKILL.md",
@@ -15,13 +17,24 @@ REQUIRED_PATHS = [
     "agents/openai.yaml",
     "scripts/check_consistency.py",
     "references/protocol.md",
+    "references/audit-matrix.md",
+    "references/branching-ci-hooks.md",
+    "references/characterization.md",
+    "references/coding-standards.md",
     "references/engineering-audits.md",
     "references/ai-workflow-audits.md",
+    "references/integration-into-other-repos.md",
     "references/patch-policy.md",
     "references/testing-strategy.md",
     "references/ai-integration-quality.md",
     "assets/AGENTS.template.md",
     "assets/Makefile.template",
+    "assets/behavior-inventory-template.md",
+    "assets/development-skill-note.template.md",
+    "assets/github-actions-verify.template.yaml",
+    "assets/patch-backlog-template.md",
+    "assets/pre-commit-config.template.yaml",
+    "assets/pyproject.template.toml",
     "assets/verify.sh.template",
     "assets/run-report-template.md",
     "examples/review-mode.md",
@@ -135,6 +148,23 @@ def check_required_paths() -> list[str]:
     for relative_path in REQUIRED_PATHS:
         if not (ROOT / relative_path).is_file():
             errors.append(f"missing required file: {relative_path}")
+    return errors
+
+
+def check_trailing_whitespace() -> list[str]:
+    """Check that required repository text files have no trailing whitespace.
+
+    Returns:
+        Human-readable consistency errors.
+    """
+    errors = []
+    for relative_path in REQUIRED_PATHS:
+        path = ROOT / relative_path
+        if not path.is_file():
+            continue
+        for line_number, line in enumerate(read_text(relative_path).splitlines(), 1):
+            if line.endswith((" ", "\t")):
+                errors.append(f"{relative_path}:{line_number} has trailing whitespace")
     return errors
 
 
@@ -324,6 +354,7 @@ def main() -> int:
     """
     errors = []
     errors.extend(check_required_paths())
+    errors.extend(check_trailing_whitespace())
     errors.extend(check_workflow_phrase())
     errors.extend(check_canonical_pointers())
     errors.extend(check_protocol_requirements())

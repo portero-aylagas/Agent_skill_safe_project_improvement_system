@@ -12,6 +12,7 @@ Add characterization tests before risky refactors.
 ## Expected Output Shape
 
 - Mode used: local safe refactor mode unless the user asked for review only.
+- Audit scope stated before findings, backlog, or patch selection.
 - Verification added or confirmed, preferably through `make verify`.
 - Normal verification avoids live API keys, network services, and paid APIs.
 - Characterization added only when the requested change is medium/high risk.

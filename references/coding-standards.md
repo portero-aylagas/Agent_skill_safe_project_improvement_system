@@ -46,6 +46,8 @@ Implementation work should be beginner/intermediate-friendly:
 - Pass clients or factories into code under test.
 - Do not require live API keys for normal tests.
 - Store prompt text, model names, and safety limits where they can be reviewed.
+  Treat this as engineering reviewability; assess prompt content quality under
+  `AI System Audits`.
 - Test behavior with fake clients and deterministic fixtures.
 
 ## Documentation

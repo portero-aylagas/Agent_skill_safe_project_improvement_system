@@ -9,9 +9,14 @@ Check:
 
 - each file has a clear purpose
 - orchestration is separated from business logic
-- UI, file I/O, API calls, prompts, config, and utilities have clear boundaries
+- UI, file I/O, API calls, prompt storage/wiring, config, and utilities have
+  clear boundaries
 - imports do not create avoidable coupling or circular dependencies
 - the current structure can grow without hiding important behavior
+
+This audit checks where prompts live and how they are connected to the
+application. Prompt content quality, prompting technique, and prompt variables
+belong under `AI System Audits`.
 
 Return:
 
@@ -143,6 +148,9 @@ Check:
 - unvalidated uploads or external documents
 - prompt injection risks when documents, URLs, or user text affect model calls
 - sensitive data in logs, outputs, reports, or committed artifacts
+
+This audit treats prompt injection as an application security boundary. Prompt
+wording and model behavior belong under `AI System Audits`.
 
 Return:
 
