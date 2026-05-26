@@ -12,6 +12,47 @@ inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> veri
 `references/protocol.md` is the canonical workflow. This README is a quick
 start; if the two ever disagree, update the README to match the protocol.
 
+## What This Is
+
+Safe Project Improvement System is a development workflow for asking an AI
+coding agent to inspect, review, and improve a repository without jumping
+straight into risky edits.
+
+It organizes review findings into two audit families.
+
+### Engineering Audits
+
+These checks focus on whether the software is understandable, maintainable,
+testable, and safe to change.
+
+| Area | Example intent |
+| --- | --- |
+| Architecture And File Structure | Check whether UI code, file I/O, API calls, prompts, config, and business logic are separated clearly enough to grow safely. |
+| Function Responsibility | Find functions that do too many jobs, hide side effects, or have names that do not match behavior. |
+| Error Handling | Look for swallowed exceptions, unclear messages, and user/API/file failures that crash instead of failing clearly. |
+| Testability | Identify code that is hard to test because it is coupled to live services, environment variables, files, or UI frameworks. |
+| Data And JSON Validation | Check whether uploaded files, JSON, CSV, API responses, and model outputs are validated before moving through the system. |
+| Repository Hygiene | Find generated files, caches, missing `.gitignore` rules, confusing duplicate files, or unclear dependency setup. |
+| Documentation And Reviewer Evidence | Check whether a new reviewer can understand setup, run commands, verification, public APIs, and known limitations. |
+| Security And Secrets | Look for hardcoded secrets, unsafe paths, risky uploads, sensitive logs, SSRF-style URL risks, and prompt injection surfaces. |
+
+### AI System Audits
+
+These checks focus on prompts, model/API usage, RAG, agents, tools, and
+multi-step AI automation.
+
+| Area | Example intent |
+| --- | --- |
+| Prompt Quality | Check whether prompts have a clear task, audience, constraints, inputs, and expected output format. |
+| Dynamic Prompting | Review how variables and user input are inserted into prompts, including injection risk and duplicated prompt construction. |
+| Structured Output | Check whether model output should be validated JSON/schema instead of fragile free text. |
+| LLM/API Integration | Review provider boundaries, credentials, model settings, retries, timeouts, token limits, and fake-client testability. |
+| RAG And Retrieval | Check document loading, chunking, embeddings, retrieval quality, empty-result behavior, and fixture-based evaluation. |
+| Agents And Tools | Review whether an agent is justified, whether tools have clear names/inputs/outputs, and how failures are recovered. |
+| Workflow Automation | Check multi-step AI/tool flows: triggers, idempotency, retries, state transitions, approvals, logs, run IDs, recovery, and cost controls. |
+| Speech Pipelines | Review audio loading, transcription prompts, chunking, timestamps, generated audio validation, and safe output naming. |
+| Cost And Usage | Check whether token/request usage, budgets, pricing assumptions, and visible warnings are appropriate for the project. |
+
 ## Quick Start
 
 Run a review before changing code:
@@ -43,6 +84,8 @@ that the core docs still point back to the canonical protocol.
 ## Core Rules
 
 - Inspect before editing.
+- Make audit scope visible before findings, backlog, or patch selection.
+- Group findings by audit family, audit area, then severity.
 - Characterize current behavior before medium/high-risk changes.
 - Keep patches focused and small.
 - Verify locally after each patch.
@@ -79,6 +122,16 @@ the full policy.
   apply one small patch, run verification, then stop.
 - **Full Automation Mode**: branch, verify, patch, commit, push, and wait for CI
   only after explicit user approval.
+
+All modes use the same audit families when they produce findings or backlog
+items:
+
+- `Engineering Audits`
+- `AI System Audits`
+
+`AI System Audits` covers prompts, model/API integrations, RAG, agents, tools,
+speech, cost, and multi-step AI/tool automation. `Workflow Automation` remains
+an audit area inside that family.
 
 ## Adoption Modes
 

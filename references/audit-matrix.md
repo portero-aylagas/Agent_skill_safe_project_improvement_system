@@ -2,9 +2,14 @@
 
 Use this matrix to choose relevant audits. Do not run every audit blindly. Deep
 audit references are optional, except where the protocol requires one for the
-review type. Load both engineering and AI/workflow deep references only when the
+review type. Load both engineering and AI System deep references only when the
 repository clearly combines software architecture risks with
-AI/workflow-specific risks.
+AI-system-specific risks.
+
+Use these user-facing audit families in reports and backlog items:
+
+- `Engineering Audits`
+- `AI System Audits`
 
 ## Python Scripts and Packages
 

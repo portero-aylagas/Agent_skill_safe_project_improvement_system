@@ -1,8 +1,12 @@
-# AI And Workflow Audits
+# AI System Audits
 
 Use this reference for deeper review of prompts, model integrations, RAG,
 agent/tool workflows, speech pipelines, and orchestrated automations. Keep
 recommendations proportional to the project.
+
+`Workflow Automation` is one audit area inside AI System Audits. It covers
+multi-step AI/tool execution, retries, state transitions, approval points, logs,
+run IDs, recovery paths, and cost controls.
 
 ## Prompt Quality
 

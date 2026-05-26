@@ -10,10 +10,35 @@ Do not edit files.
 
 ## Expected Output Shape
 
-- Mode used: review mode.
-- Files changed: none.
-- Current behavior summary: entry points, verification, tests, config, live-service boundaries.
-- Audit findings: prioritized by risk and user-visible impact, including coding
-  standards conformance for software engineering quality reviews.
-- Backlog: small patch candidates with likely files, risk level, characterization need, and verification command.
-- Stopped work: any changes that require explicit approval.
+- Audit scope:
+  - selected audit families and areas
+  - skipped audit families and areas
+  - what each selected area checks and why it applies
+- Current behavior summary: entry points, verification, tests, config,
+  live-service boundaries.
+- Findings by audit family, audit area, then severity:
+
+```text
+Engineering Audits
+- Security And Secrets
+  - High
+    - Finding with exact location, impact, and minimal fix.
+- Repository Hygiene
+  - Low
+    - Finding with exact location, impact, and minimal fix.
+
+AI System Audits
+- Prompt Quality
+  - Medium
+    - Finding with exact location, impact, and minimal fix.
+- Workflow Automation
+  - No material findings.
+```
+
+- Backlog: small patch candidates with audit family, audit area, severity, likely
+  files, risk level, characterization need, and verification command.
+- Review result:
+  - Mode used: review mode.
+  - Files changed: none.
+  - Verification command and result, if run.
+  - Stopped work: any changes that require explicit approval.

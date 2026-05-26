@@ -58,6 +58,16 @@ PROTOCOL_REQUIREMENTS = [
     "`references/coding-standards.md`",
 ]
 
+AUDIT_SCOPE_REQUIREMENTS = [
+    "## Audit Scope Gate",
+    "selected audit families and areas",
+    "skipped audit families and areas",
+    "`Engineering Audits`",
+    "`AI System Audits`",
+    "Group findings by audit family, then audit area, then severity.",
+    "Pass through the Audit Scope Gate",
+]
+
 CODING_STANDARDS_REQUIREMENTS = [
     "Use these standards when reviewing, editing, refactoring, or installing",
     "Implementation work should be beginner/intermediate-friendly",
@@ -94,9 +104,10 @@ DEEP_AUDIT_REQUIREMENTS = [
     "references/coding-standards.md",
     "Review mode always loads `references/protocol.md`",
     "Deep audit references are optional. In review mode, load",
-    "AI/workflow references only when the repository",
+    "AI System Audits",
+    "AI System references",
     "except where the protocol requires one for the",
-    "audit references during local safe refactor mode unless the patch directly",
+    "safe refactor mode unless the patch directly",
     "Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.",
     "UI/backend separation: callbacks validate inputs and call clean backend",
 ]
@@ -165,6 +176,35 @@ def check_protocol_requirements() -> list[str]:
     for requirement in PROTOCOL_REQUIREMENTS:
         if requirement not in protocol:
             errors.append(f"protocol missing requirement: {requirement}")
+    return errors
+
+
+def check_audit_scope_requirements() -> list[str]:
+    """Check that mode-wide audit scope guidance stays present.
+
+    Returns:
+        Human-readable consistency errors.
+    """
+    docs = {
+        "references/protocol.md": read_text("references/protocol.md"),
+        "SKILL.md": read_text("SKILL.md"),
+        "README.md": read_text("README.md"),
+        "examples/review-mode.md": read_text("examples/review-mode.md"),
+        "assets/patch-backlog-template.md": read_text(
+            "assets/patch-backlog-template.md"
+        ),
+        "assets/run-report-template.md": read_text("assets/run-report-template.md"),
+    }
+    protocol = docs["references/protocol.md"]
+    errors = []
+    for requirement in AUDIT_SCOPE_REQUIREMENTS:
+        if requirement not in protocol:
+            errors.append(f"protocol missing audit scope requirement: {requirement}")
+    for relative_path, text in docs.items():
+        if "Engineering Audits" not in text:
+            errors.append(f"{relative_path} missing Engineering Audits wording")
+        if "AI System Audits" not in text:
+            errors.append(f"{relative_path} missing AI System Audits wording")
     return errors
 
 
@@ -256,7 +296,9 @@ def check_deep_audit_requirements() -> list[str]:
     if "## Error Handling" not in engineering or "## Testability" not in engineering:
         errors.append("engineering audits missing core sections")
     if "## Prompt Quality" not in ai_workflow or "## RAG And Retrieval" not in ai_workflow:
-        errors.append("AI workflow audits missing core sections")
+        errors.append("AI System audits missing core sections")
+    if "# AI System Audits" not in ai_workflow:
+        errors.append("AI workflow audit reference missing AI System Audits title")
     return errors
 
 
@@ -285,6 +327,7 @@ def main() -> int:
     errors.extend(check_workflow_phrase())
     errors.extend(check_canonical_pointers())
     errors.extend(check_protocol_requirements())
+    errors.extend(check_audit_scope_requirements())
     errors.extend(check_coding_standards_requirements())
     errors.extend(check_patch_policy_requirements())
     errors.extend(check_testing_strategy_requirements())

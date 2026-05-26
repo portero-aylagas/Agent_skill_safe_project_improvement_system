@@ -37,6 +37,11 @@ inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> veri
 Do not start by refactoring. Inspect the current project structure, behavior,
 tests, configuration, and entry points first.
 
+Before findings, backlog, or patch selection, make audit scope visible. State
+selected and skipped audit areas, explain why they apply, and group findings by
+audit family, audit area, then severity. Use `Engineering Audits` and
+`AI System Audits` as the user-facing audit families.
+
 ## One-Patch Policy
 
 Make one focused patch at a time. Do not combine:

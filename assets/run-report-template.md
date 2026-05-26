@@ -17,6 +17,9 @@ small patches.
 ## Scope
 
 - User request:
+- Audit families and areas selected:
+- Audit families and areas skipped:
+- Scope selection reason:
 - Files inspected:
 - Files changed:
 - Out of scope:
@@ -27,11 +30,27 @@ small patches.
 - New characterization added:
 - Manual checklist, if used:
 
-## Findings And Backlog
+## Findings By Audit Family
 
-| Priority | Risk | Finding | Proposed Patch | Verification |
-| --- | --- | --- | --- | --- |
-|  |  |  |  |  |
+```text
+Engineering Audits
+- Audit Area
+  - Severity
+    - Finding
+
+AI System Audits
+- Audit Area
+  - Severity
+    - Finding
+```
+
+Selected areas with no issues should say `No material findings`.
+
+## Backlog
+
+| Priority | Audit Family | Audit Area | Severity | Risk | Finding | Proposed Patch | Verification |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |  |
 
 ## Patch Applied
 

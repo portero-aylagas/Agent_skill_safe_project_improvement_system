@@ -51,6 +51,12 @@ repository explicitly integrates it into runtime behavior.
 
 If the user says audit, review, or planning only, use Review Mode.
 
+All modes pass through an Audit Scope Gate before findings, backlog, or patch
+selection. Make selected and skipped audit areas visible, explain what will be
+checked and why it applies, and group findings by audit family, audit area, then
+severity. Use these user-facing audit families: `Engineering Audits` and
+`AI System Audits`.
+
 ## Non-Negotiable Rules
 
 - Use one lead agent for edits.
@@ -74,11 +80,11 @@ Review mode always loads `references/protocol.md`,
 Deep audit references are optional. In review mode, load
 `references/engineering-audits.md` for software engineering quality reviews. Load
 `references/ai-workflow-audits.md` or `references/ai-integration-quality.md` for
-AI, API, prompt, RAG, tool, agent, or workflow repositories. Load both
-engineering and AI/workflow references only when the repository clearly has both
-general software architecture risks and AI/workflow-specific risks. Do not load
-deep audit references during local safe refactor mode unless the patch directly
-touches that area.
+AI System Audits: prompts, APIs, RAG, tools, agents, speech, cost, and
+multi-step AI/tool automation. Load both engineering and AI System references
+only when the repository clearly has both general software architecture risks
+and AI-system-specific risks. Do not load deep audit references during local
+safe refactor mode unless the patch directly touches that area.
 
 - `references/protocol.md`: read first for the full workflow and mode details.
 - `references/coding-standards.md`: read before reviewing, editing,
@@ -90,7 +96,8 @@ touches that area.
   architecture, error handling, testability, validation, documentation, hygiene,
   UI separation, or security checks.
 - `references/ai-workflow-audits.md`: read when review mode needs deeper prompt,
-  structured output, RAG, agent/tool, speech, cost, or workflow automation checks.
+  structured output, RAG, agent/tool, speech, cost, or workflow automation checks
+  under `AI System Audits`.
 - `references/patch-policy.md`: read before making code changes.
 - `references/testing-strategy.md`: read when adding or repairing verification.
 - `references/ai-integration-quality.md`: read for prompts, providers, APIs,
@@ -128,8 +135,10 @@ Use `assets/` as project templates, adapting them to the target repository:
 
 When work is complete, report:
 
+- audit scope selected and skipped
 - mode used
 - files changed
+- findings grouped by audit family, audit area, and severity
 - characterization added or confirmed
 - verification command and result
 - any stopped work, failed verification, or approval needed
