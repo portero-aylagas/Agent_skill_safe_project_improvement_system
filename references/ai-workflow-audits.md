@@ -4,9 +4,40 @@ Use this reference for deeper review of prompts, model integrations, RAG,
 agent/tool workflows, speech pipelines, and orchestrated automations. Keep
 recommendations proportional to the project.
 
+`AI Software Architecture` is the cross-cutting structure audit for AI systems.
+Use it to decide whether AI-specific parts have clear ownership and boundaries.
+Route detailed prompt, provider, retrieval, tool, workflow, speech, cost, and
+evaluation findings to the focused areas below.
+
 `Workflow Automation` is one audit area inside AI System Audits. It covers
 multi-step AI/tool execution, retries, state transitions, approval points, logs,
 run IDs, recovery paths, and cost controls.
+
+## AI Software Architecture
+
+Check:
+
+- provider adapters, prompt storage/wiring, and model-call boundaries have clear
+  ownership
+- deterministic business logic is separated from model-dependent behavior
+- RAG, agent, tool, and workflow components compose through understandable
+  interfaces
+- dependency boundaries allow fake clients or fixtures without live services
+- AI-specific structure can grow without scattering provider, prompt, or runtime
+  concerns across unrelated code
+
+Do not use this area for prompt wording, prompt variables, schemas/parsing,
+provider settings, retries, timeouts, retrieval quality, tool contracts,
+workflow recovery, budgets, or evaluation details. Route those findings to the
+focused AI System audit areas.
+
+Return:
+
+- AI architecture summary
+- component boundary problems
+- model-dependent behavior that should be isolated
+- minimal structure changes worth doing now
+- focused audit areas that should own deeper follow-up
 
 ## Prompt Quality
 

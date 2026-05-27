@@ -3,20 +3,22 @@
 Use this reference when `audit-matrix.md` shows that a deeper engineering review
 is useful. Do not run every audit blindly.
 
-## Architecture And File Structure
+## General Software Architecture
 
 Check:
 
 - each file has a clear purpose
 - orchestration is separated from business logic
-- UI, file I/O, API calls, prompt storage/wiring, config, and utilities have
-  clear boundaries
+- UI, file I/O, external service calls, config, and utilities have clear
+  boundaries
 - imports do not create avoidable coupling or circular dependencies
 - the current structure can grow without hiding important behavior
+- AI-specific code connects to the application through clear module boundaries
 
-This audit checks where prompts live and how they are connected to the
-application. Prompt content quality, prompting technique, and prompt variables
-belong under `AI System Audits`.
+This audit checks general software structure. Provider adapters, prompt
+storage/wiring, and model-dependent architecture belong under
+`AI Software Architecture`. Prompt content quality, prompting technique, and
+prompt variables belong under focused `AI System Audits`.
 
 Return:
 

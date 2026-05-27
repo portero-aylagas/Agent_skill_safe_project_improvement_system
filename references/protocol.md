@@ -79,11 +79,11 @@ Use these user-facing audit families:
 - `Engineering Audits`
 - `AI System Audits`
 
-`AI System Audits` covers prompts, model/API integrations, RAG, agents, tools,
-speech, cost, and multi-step AI/tool automation. `Workflow Automation` is an
-audit area inside `AI System Audits`; it means trigger conditions, idempotency,
-retries, state transitions, approvals, logs, run IDs, recovery paths, and cost
-controls.
+`AI System Audits` covers AI software architecture, prompts, model/API
+integrations, RAG, agents, tools, speech, cost, and multi-step AI/tool
+automation. `Workflow Automation` is an audit area inside `AI System Audits`; it
+means trigger conditions, idempotency, retries, state transitions, approvals,
+logs, run IDs, recovery paths, and cost controls.
 
 ## Step 4: Audit
 
@@ -107,6 +107,9 @@ Engineering Audits
     - Finding...
 
 AI System Audits
+- AI Software Architecture
+  - Medium
+    - Finding...
 - Prompt Quality
   - Medium
     - Finding...

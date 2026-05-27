@@ -145,7 +145,7 @@ testable, and safe to change.
 
 | Area | Example intent |
 | --- | --- |
-| Architecture And File Structure | Check whether UI code, file I/O, API calls, prompt storage/wiring, config, and business logic are separated clearly enough to grow safely. This is about where prompts live and how they are connected, not whether the prompt content is good. |
+| General Software Architecture | Check whether modules, orchestration, business logic, UI code, file I/O, external service calls, config, and utilities are separated clearly enough to grow safely. AI-specific code should connect through clear application boundaries, but AI component design belongs under `AI Software Architecture`. |
 | Function Responsibility | Find functions that do too many jobs, hide side effects, or have names that do not match behavior. |
 | Error Handling | Look for swallowed exceptions, unclear messages, and user/API/file failures that crash instead of failing clearly. |
 | Testability | Identify code that is hard to test because it is coupled to live services, environment variables, files, or UI frameworks. |
@@ -161,6 +161,7 @@ multi-step AI automation.
 
 | Area | Example intent |
 | --- | --- |
+| AI Software Architecture | Check whether provider adapters, prompt storage/wiring, model-call boundaries, deterministic logic, RAG/agent/workflow composition, and fake-client seams have clear ownership without duplicating focused AI checks. |
 | Prompt Quality | Check whether prompt content has a clear task, audience, constraints, inputs, and expected output format. |
 | Dynamic Prompting | Review how variables and user input are inserted into prompts, including injection risk and duplicated prompt construction. |
 | Structured Output | Check whether model output should be validated JSON/schema instead of fragile free text. |
@@ -171,9 +172,9 @@ multi-step AI automation.
 | Speech Pipelines | Review audio loading, transcription prompts, chunking, timestamps, generated audio validation, and safe output naming. |
 | Cost And Usage | Check whether token/request usage, budgets, pricing assumptions, and visible warnings are appropriate for the project. |
 
-`AI System Audits` covers prompts, model/API integrations, RAG, agents, tools,
-speech, cost, and multi-step AI/tool automation. `Workflow Automation` remains
-an audit area inside that family.
+`AI System Audits` covers AI software architecture, prompts, model/API
+integrations, RAG, agents, tools, speech, cost, and multi-step AI/tool
+automation. `Workflow Automation` remains an audit area inside that family.
 
 ## Characterization And Verification
 

@@ -80,8 +80,8 @@ Review mode always loads `references/protocol.md`,
 Deep audit references are optional. In review mode, load
 `references/engineering-audits.md` for software engineering quality reviews. Load
 `references/ai-workflow-audits.md` or `references/ai-integration-quality.md` for
-AI System Audits: prompts, APIs, RAG, tools, agents, speech, cost, and
-multi-step AI/tool automation. Load both engineering and AI System references
+AI System Audits: AI Software Architecture, prompts, APIs, RAG, tools, agents,
+speech, cost, and multi-step AI/tool automation. Load both engineering and AI System references
 only when the repository clearly has both general software architecture risks
 and AI-system-specific risks. Do not load deep audit references during local
 safe refactor mode unless the patch directly touches that area.
@@ -93,11 +93,11 @@ safe refactor mode unless the patch directly touches that area.
   when current behavior is unclear.
 - `references/audit-matrix.md`: read for review/audit/backlog work.
 - `references/engineering-audits.md`: read when review mode needs deeper
-  architecture, error handling, testability, validation, documentation, hygiene,
-  UI separation, or security checks.
+  general software architecture, error handling, testability, validation,
+  documentation, hygiene, UI separation, or security checks.
 - `references/ai-workflow-audits.md`: read when review mode needs deeper prompt,
-  structured output, RAG, agent/tool, speech, cost, or workflow automation checks
-  under `AI System Audits`.
+  AI Software Architecture, structured output, RAG, agent/tool, speech, cost, or
+  workflow automation checks under `AI System Audits`.
 - `references/patch-policy.md`: read before making code changes.
 - `references/testing-strategy.md`: read when adding or repairing verification.
 - `references/ai-integration-quality.md`: read for prompts, providers, APIs,

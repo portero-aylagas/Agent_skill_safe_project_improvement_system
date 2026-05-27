@@ -25,6 +25,8 @@ Use these user-facing audit families in reports and backlog items:
 
 ## AI Integration Projects
 
+- AI Software Architecture: provider adapters, prompt wiring, model-call
+  boundaries, deterministic logic, and fake-client seams are not scattered.
 - Provider boundary: one place for model/API calls.
 - Credentials: no required live keys for tests, no secrets committed.
 - Prompt quality: named prompts, versionable text, clear inputs/outputs.

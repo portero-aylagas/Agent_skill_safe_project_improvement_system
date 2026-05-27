@@ -20,6 +20,9 @@ Do not edit files.
 
 ```text
 Engineering Audits
+- General Software Architecture
+  - Medium
+    - Finding with exact location, impact, and minimal fix.
 - Security And Secrets
   - High
     - Finding with exact location, impact, and minimal fix.
@@ -28,6 +31,9 @@ Engineering Audits
     - Finding with exact location, impact, and minimal fix.
 
 AI System Audits
+- AI Software Architecture
+  - Medium
+    - Finding with exact location, impact, and minimal fix.
 - Prompt Quality
   - Medium
     - Finding with exact location, impact, and minimal fix.

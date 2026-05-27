@@ -118,6 +118,7 @@ DEEP_AUDIT_REQUIREMENTS = [
     "Review mode always loads `references/protocol.md`",
     "Deep audit references are optional. In review mode, load",
     "AI System Audits",
+    "AI Software Architecture",
     "AI System references",
     "except where the protocol requires one for the",
     "safe refactor mode unless the patch directly",
@@ -323,9 +324,17 @@ def check_deep_audit_requirements() -> list[str]:
     for requirement in DEEP_AUDIT_REQUIREMENTS:
         if requirement not in skill and requirement not in audit_matrix:
             errors.append(f"missing deep audit requirement: {requirement}")
-    if "## Error Handling" not in engineering or "## Testability" not in engineering:
+    if (
+        "## General Software Architecture" not in engineering
+        or "## Error Handling" not in engineering
+        or "## Testability" not in engineering
+    ):
         errors.append("engineering audits missing core sections")
-    if "## Prompt Quality" not in ai_workflow or "## RAG And Retrieval" not in ai_workflow:
+    if (
+        "## AI Software Architecture" not in ai_workflow
+        or "## Prompt Quality" not in ai_workflow
+        or "## RAG And Retrieval" not in ai_workflow
+    ):
         errors.append("AI System audits missing core sections")
     if "# AI System Audits" not in ai_workflow:
         errors.append("AI workflow audit reference missing AI System Audits title")
