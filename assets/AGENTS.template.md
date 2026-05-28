@@ -38,17 +38,22 @@ Do not start by refactoring. Inspect the current project structure, behavior,
 tests, configuration, and entry points first.
 
 Before audit, backlog, patch selection, or Full Automation work, build a short
-Requirements Ledger from the user request, selected mode, repo-local
+Requirements Ledger internally from the user request, selected mode, repo-local
 instructions, skill rules, approval boundaries, and user-provided audit/backlog
 context. Must-have requirements need planned evidence or verification, and
-deferrals need a reason.
+deferrals need a reason. Show the ledger when it affects scope, approval,
+backlog selection, Full Automation, deferrals, conflicts, or explicit
+requirements/status reporting.
 
 Before findings, backlog, or patch selection, make audit scope visible. State
 selected and skipped audit areas, explain why they apply, and group findings by
 audit family, audit area, then severity. Use `Engineering Audits` and
-`AI System Audits` as the user-facing audit families. Audit/review outputs must
-use exactly two main findings tables: `Engineering Audits Table` and
-`AI System Audits Table`.
+`AI System Audits` as the user-facing audit families. Use the two audit tables
+for Review Mode, audit outputs, persistent backlog outputs, and run reports that
+include audit findings. Local Safe Refactor Mode may report only the selected
+audit area and verification for one focused patch unless the user requested a
+review/audit, a backlog is produced, or multiple audit areas drive patch
+selection.
 
 ## One-Patch Policy
 
@@ -96,6 +101,6 @@ explicitly authorizes that action.
 In Full Automation Mode, run the pre-publish gate before commit, push, or pull
 request creation/update: map findings to code/tests/docs/deferrals, recheck the
 Requirements Ledger, confirm any required run report, state commit strategy,
-respect or justify patch thresholds, prepare a real pull request summary and
-verification, reject fake issue references or placeholder metadata, check CI
-after push, and hand off only after process artifacts are complete.
+respect or justify patch thresholds, prepare a pull request body with real
+summary and verification, reject fake issue references or placeholder metadata,
+check CI after push, and hand off only after process artifacts are complete.

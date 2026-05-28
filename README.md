@@ -49,15 +49,21 @@ Do not blindly overwrite an existing `AGENTS.md`, `Makefile`, `verify.sh`, or
 | **Local Safe Refactor Mode** | You want one local improvement made safely. | Inspect, confirm or add verification, characterize risky behavior, apply one small patch, run verification, and stop. |
 | **Full Automation Mode** | You explicitly approve branch, commit, push, pull request, and CI follow-up work. | Create a branch, patch, commit, push, wait for CI, and report. Use only after explicit approval. |
 
-All modes build a lightweight Requirements Ledger before audit, backlog, patch,
-or Full Automation work. It is a short operational checklist extracted from the
-user request, selected mode, repo-local instructions, skill rules, approval
-boundaries, and user-provided audit/backlog context.
+All modes consider a lightweight Requirements Ledger before audit, backlog,
+patch, or Full Automation work. It is a short operational checklist extracted
+from the user request, selected mode, repo-local instructions, skill rules,
+approval boundaries, and user-provided audit/backlog context. The agent should
+show it only when it affects scope, approval, backlog selection, Full
+Automation, deferrals, conflicts, or explicit requirements/status reporting.
 
 All modes pass through the Audit Scope Gate before findings, backlog, or patch
 selection. The agent should state selected and skipped audit areas and explain
-why they apply. Audit/review output must use exactly two main findings tables:
-`Engineering Audits Table` and `AI System Audits Table`.
+why they apply. `Engineering Audits Table` and `AI System Audits Table` are the
+canonical audit format and are mandatory for Review Mode, audit outputs,
+persistent backlog outputs, and run reports that include audit findings. A
+trivial Local Safe Refactor Mode patch can report the selected audit area and
+verification without printing full audit tables unless the user requested review
+or a backlog.
 
 ### 3. Paste a prompt
 
@@ -96,7 +102,8 @@ Do not require live API calls, network services, or paid services.
 Add characterization tests before risky refactors.
 ```
 
-Use full automation only after approving branch, commit, push, and CI work:
+Use full automation only after approving branch, commit, push, pull request, and
+CI work:
 
 ```text
 Use the safe project improvement system in full automation mode.
@@ -121,9 +128,11 @@ Do not replace existing local instruction files; merge or adapt carefully.
 The agent should:
 
 - inspect before editing
-- track must-have requirements and deferrals in a short Requirements Ledger
+- track must-have requirements and deferrals in a short Requirements Ledger,
+  showing it only when it materially affects the work or the user asks
 - make audit scope visible before findings, backlog, or patch selection
-- report audits using the two required audit tables
+- report Review Mode, audit, persistent backlog, and audit run-report findings
+  using the two required audit tables
 - characterize current behavior before medium/high-risk changes
 - keep each patch focused and small
 - verify locally after each patch

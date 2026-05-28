@@ -26,6 +26,10 @@ small patches.
 
 ## Requirements Ledger
 
+Keep this short. Include rows that affected scope, approval, backlog selection,
+Full Automation, deferrals, conflicts, or explicit requirements/status
+reporting.
+
 | Requirement | Source | Must/Should | Planned Evidence Or Verification | Status Or Deferral |
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
@@ -48,9 +52,10 @@ small patches.
 | --- | --- | --- | --- | --- | --- | --- |
 |  | Yes/No | High/Medium/Low/Info/None |  |  |  |  |
 
-Every known audit area should appear in the relevant table. Areas with no issues
-should say `No material findings`. Areas not checked should use `Checked? = No`
-and explain why.
+When this report includes audit findings, every known audit area should appear
+in the relevant table. Areas with no issues should say `No material findings`.
+Areas not checked should use `Checked? = No` and explain why. Use `N/A` only
+when the run report does not include audit findings.
 
 ## Backlog
 
@@ -77,7 +82,7 @@ work. Use `N/A` when no publish action is in scope.
 - Run report required and present:
 - Commit strategy:
 - Patch size/scope thresholds respected or justified:
-- Pull request summary and verification ready:
+- Pull request body has real summary and verification:
 - No fake issue references or placeholder metadata:
 - CI result checked after push:
 - Final handoff after process artifacts complete:

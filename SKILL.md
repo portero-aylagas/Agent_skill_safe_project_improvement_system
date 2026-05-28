@@ -47,23 +47,28 @@ repository explicitly integrates it into runtime behavior.
   verification, apply one small patch, run local verification, then stop. Use
   this by default when the user asks to refactor or improve code.
 - **Full Automation Mode**: create a branch, add verification/tests, patch,
-  commit, push, wait for CI, and report. Use only after explicit user approval.
+  commit, push, create or update a pull request when approved, wait for CI, and
+  report. Use only after explicit user approval.
 
 If the user says audit, review, or planning only, use Review Mode.
 
-All modes build a lightweight Requirements Ledger before audit, backlog, patch,
-or Full Automation work. The ledger tracks must/should requirements from the
-user request, selected mode, repo-local instructions, skill rules, approval
+All modes consider a lightweight Requirements Ledger before audit, backlog,
+patch, or Full Automation work. The ledger tracks must/should requirements from
+the user request, selected mode, repo-local instructions, skill rules, approval
 boundaries, and user-provided audit/backlog context. Must-have requirements need
-planned evidence or verification, and deferrals need a reason.
+planned evidence or verification, and deferrals need a reason. Show the ledger
+only when it affects scope, approval, backlog selection, Full Automation,
+deferrals, conflicts, or the user asks for requirements/status.
 
 All modes pass through an Audit Scope Gate before findings, backlog, or patch
 selection. Make selected and skipped audit areas visible and explain what will be
-checked and why it applies. Every audit/review output uses exactly two main
-findings tables: `Engineering Audits Table` and `AI System Audits Table`. Each
-known audit area appears in the relevant table with `Checked?`, severity,
-evidence/location, recommended action, and verification. Use severity values
-`High`, `Medium`, `Low`, `Info`, or `None`.
+checked and why it applies. The canonical audit/report format uses two main
+findings tables: `Engineering Audits Table` and `AI System Audits Table`. These
+tables are mandatory for Review Mode, audit outputs, persistent backlog outputs,
+and run reports that include audit findings. Local Safe Refactor Mode may report
+only the selected audit area and verification for one focused patch unless the
+user requested a review/audit, a backlog is produced, or multiple audit areas
+drive patch selection.
 
 ## Non-Negotiable Rules
 
@@ -76,8 +81,9 @@ evidence/location, recommended action, and verification. Use severity values
 - Do not push, install hooks, or add strict CI unless explicitly authorized.
 - Use fake clients/mocks for AI/API tests.
 - Normal verification must not require live API keys.
-- Audit/review outputs must use the two required audit tables, not only a
-  free-text findings list.
+- Review Mode, audit outputs, persistent backlog outputs, and run reports with
+  audit findings must use the two required audit tables, not only a free-text
+  findings list.
 - Full Automation Mode must pass the pre-publish gate before commit, push, or
   pull request creation/update.
 - Stop if verification fails.
@@ -97,8 +103,7 @@ multi-step AI/tool automation. Use `references/ai-integration-quality.md` as
 extra implementation guidance when working directly on model/provider, prompt,
 RAG, or evaluation code. Load both engineering and AI System references only
 when the repository clearly has both general software architecture risks and
-AI-system-specific risks. For safe refactor mode unless the patch directly
-touches that area, keep deep audit loading minimal.
+AI-system-specific risks. Do not load deep audit references in safe refactor mode unless the patch directly touches that area.
 
 - `references/protocol.md`: read first for the full workflow and mode details.
 - `references/coding-standards.md`: read before reviewing, editing,

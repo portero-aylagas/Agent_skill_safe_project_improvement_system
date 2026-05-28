@@ -60,7 +60,8 @@ require live API keys.
 ## Requirements Ledger
 
 Before audit, backlog, patch selection, or Full Automation work, build a short
-Requirements Ledger. This is an operational checklist, not a PRD.
+Requirements Ledger internally. This is an operational checklist, not a PRD, and
+it does not always need to be printed in the final response.
 
 Extract ledger rows from:
 
@@ -77,6 +78,15 @@ Use this shape:
 | --- | --- | --- | --- | --- |
 |  |  |  |  |  |
 
+Generic examples:
+
+| Requirement | Source | Must/Should | Planned Evidence Or Verification | Status Or Deferral |
+| --- | --- | --- | --- | --- |
+| Use Review Mode | User request | Must | Report mode used and files changed: none | Planned |
+| Do not edit files | Review Mode | Must | `git status` / final files changed report | Planned |
+| Run verification | Skill protocol | Must for code changes | `make verify` result | Planned |
+| Create run report | Full Automation Mode | Must when required | Report path in final response | Planned |
+
 Rules:
 
 - Must-have requirements need planned evidence or verification before work
@@ -84,7 +94,13 @@ Rules:
 - If a requirement is deferred, state why in `Status Or Deferral`.
 - Keep the ledger short and operational. Do not turn it into a project
   requirements document.
-- In Review Mode, the ledger can be shown briefly before the audit tables.
+- Show the ledger when it affects audit scope, approval boundaries, backlog
+  selection, Full Automation, deferrals, conflicting requirements, or when the
+  user explicitly asks for requirements or status.
+- For trivial Local Safe Refactor Mode changes, the final response may summarize
+  only must-have requirement status instead of showing the full ledger table.
+- In Review Mode, the ledger can be shown briefly before the audit tables when
+  it helps explain scope or constraints.
 - In Full Automation Mode, check the ledger again before commit, push, or pull
   request creation/update.
 
@@ -126,8 +142,16 @@ When reviewing software engineering quality, assess conformance to
 Group findings by audit family, then audit area, then severity. Do not return a
 single mixed severity list.
 
-Every audit or review output must include exactly two main findings tables, in
-this order:
+The two audit tables below are the canonical audit/report format. They are
+mandatory for Review Mode, audit outputs, persistent backlog outputs, and run
+reports that include audit findings. Local Safe Refactor Mode does not need to
+print full two-table audits unless the user requested a review/audit, a backlog
+is produced, or patch selection depends on multiple audit areas. If only one
+focused patch is implemented, the agent may report the selected audit area and
+verification without printing every audit area table.
+
+When the tables are required, include exactly two main findings tables in this
+order:
 
 ## Engineering Audits Table
 
@@ -197,7 +221,7 @@ For low-risk local patches, the final chat report is usually enough.
 Use when the user asks for audit, review, assessment, backlog, or planning.
 Pass through the Audit Scope Gate before producing findings or backlog items.
 Show the Requirements Ledger briefly before the two main audit tables when it
-helps make user requirements, mode constraints, or approval boundaries clear.
+affects scope, constraints, deferrals, or approval boundaries.
 
 Always load:
 
@@ -272,7 +296,7 @@ Before commit, push, or pull request creation/update, run a pre-publish gate:
 - run report exists when required
 - commit strategy is explicit
 - patch size/scope thresholds are respected or justified
-- pull request body has summary and verification
+- pull request body has real summary and verification
 - pull request body contains no fake issue references or placeholder metadata
 - CI result is checked after push
 - final handoff happens only after process artifacts are complete

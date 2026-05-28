@@ -61,7 +61,8 @@ projects.
 - Independent findings should normally be separate commits.
 - Documentation or run-report commits should be separate when generated.
 - If several findings are combined, explain why they are inseparable.
-- Pull request bodies must summarize the actual remediation and verification.
+- Pull request bodies must include a real summary of the actual remediation and
+  verification.
 - Reject fake issue references, placeholder metadata, and inaccurate review
   evidence.
 
@@ -88,7 +89,7 @@ Before commit, push, or pull request creation/update, confirm:
 - run report exists when required
 - commit strategy is explicit
 - patch size/scope thresholds are respected or justified
-- pull request body has summary and verification
+- pull request body has real summary and verification
 - pull request body contains no fake issue references or placeholder metadata
 - CI result is checked after push
 - final handoff happens only after process artifacts are complete
