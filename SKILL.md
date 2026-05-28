@@ -51,11 +51,19 @@ repository explicitly integrates it into runtime behavior.
 
 If the user says audit, review, or planning only, use Review Mode.
 
+All modes build a lightweight Requirements Ledger before audit, backlog, patch,
+or Full Automation work. The ledger tracks must/should requirements from the
+user request, selected mode, repo-local instructions, skill rules, approval
+boundaries, and user-provided audit/backlog context. Must-have requirements need
+planned evidence or verification, and deferrals need a reason.
+
 All modes pass through an Audit Scope Gate before findings, backlog, or patch
-selection. Make selected and skipped audit areas visible, explain what will be
-checked and why it applies, and group findings by audit family, audit area, then
-severity. Use these user-facing audit families: `Engineering Audits` and
-`AI System Audits`.
+selection. Make selected and skipped audit areas visible and explain what will be
+checked and why it applies. Every audit/review output uses exactly two main
+findings tables: `Engineering Audits Table` and `AI System Audits Table`. Each
+known audit area appears in the relevant table with `Checked?`, severity,
+evidence/location, recommended action, and verification. Use severity values
+`High`, `Medium`, `Low`, `Info`, or `None`.
 
 ## Non-Negotiable Rules
 
@@ -68,6 +76,10 @@ severity. Use these user-facing audit families: `Engineering Audits` and
 - Do not push, install hooks, or add strict CI unless explicitly authorized.
 - Use fake clients/mocks for AI/API tests.
 - Normal verification must not require live API keys.
+- Audit/review outputs must use the two required audit tables, not only a
+  free-text findings list.
+- Full Automation Mode must pass the pre-publish gate before commit, push, or
+  pull request creation/update.
 - Stop if verification fails.
 
 ## Reference Loading
@@ -79,12 +91,14 @@ Review mode always loads `references/protocol.md`,
 
 Deep audit references are optional. In review mode, load
 `references/engineering-audits.md` for software engineering quality reviews. Load
-`references/ai-workflow-audits.md` or `references/ai-integration-quality.md` for
-AI System Audits: AI Software Architecture, prompts, APIs, RAG, tools, agents,
-speech, cost, and multi-step AI/tool automation. Load both engineering and AI System references
-only when the repository clearly has both general software architecture risks
-and AI-system-specific risks. Do not load deep audit references during local
-safe refactor mode unless the patch directly touches that area.
+`references/ai-workflow-audits.md` for AI System Audits: AI Software
+Architecture, prompts, APIs, RAG, tools, agents, speech, cost, evaluation, and
+multi-step AI/tool automation. Use `references/ai-integration-quality.md` as
+extra implementation guidance when working directly on model/provider, prompt,
+RAG, or evaluation code. Load both engineering and AI System references only
+when the repository clearly has both general software architecture risks and
+AI-system-specific risks. For safe refactor mode unless the patch directly
+touches that area, keep deep audit loading minimal.
 
 - `references/protocol.md`: read first for the full workflow and mode details.
 - `references/coding-standards.md`: read before reviewing, editing,
@@ -128,17 +142,19 @@ Use `assets/` as project templates, adapting them to the target repository:
   without live secrets.
 - `behavior-inventory-template.md`: behavior characterization worksheet.
 - `patch-backlog-template.md`: prioritized improvement backlog.
-- `run-report-template.md`: optional audit trail for review, full automation,
-  medium/high-risk patches, verification failures, or persistent backlogs.
+- `run-report-template.md`: required audit trail for full automation and
+  optional audit trail for review, medium/high-risk patches, verification
+  failures, or persistent backlogs.
 
 ## Default Output
 
 When work is complete, report:
 
 - audit scope selected and skipped
+- Requirements Ledger status for must-have items and deferrals
 - mode used
 - files changed
-- findings grouped by audit family, audit area, and severity
+- findings in the two required audit tables
 - characterization added or confirmed
 - verification command and result
 - any stopped work, failed verification, or approval needed

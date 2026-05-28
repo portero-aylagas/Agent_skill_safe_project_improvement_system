@@ -15,13 +15,24 @@ Use these user-facing audit families in reports and backlog items:
 
 - Entry points: scripts, modules, CLI commands, notebooks converted to scripts.
 - Imports: missing dependencies, circular imports, import-time side effects.
+- Reproducibility and dependencies: dependency files, Python version, pinned or
+  bounded requirements, lockfile expectations, install docs, and future
+  breakage risk from floating libraries.
+- CI maturity: local verification mirrored in CI without live secrets, with
+  stronger checks added only when proportional.
 - Configuration: environment variables, defaults, `.env.example`.
 - Errors: clear exceptions, no swallowed failures, useful messages.
 - Data handling: schemas, file paths, encoding, input validation.
+- Artifact safety: generated or uploaded files cannot silently overwrite
+  unrelated files, and automatic names are collision-resistant when needed.
+- User-controlled file/path safety: paths and uploads are validated before use
+  and do not expose arbitrary local files.
 - Verification: compile/import checks, pytest, smoke tests.
 - Documentation: public module/class/function docstrings, comments that reduce
   cognitive load, clear run command, sample input, expected output, limitations,
   and fallback behavior when needed for review or demo.
+- Process evidence: setup, run reports, commit/PR evidence, known limitations,
+  and rejection of fake issue references or placeholder metadata.
 
 ## AI Integration Projects
 
@@ -33,7 +44,10 @@ Use these user-facing audit families in reports and backlog items:
 - Prompt technique: zero-shot, few-shot, or structured output chosen deliberately.
 - Determinism: configurable temperature, stable fake-client tests.
 - Failure modes: rate limits, timeouts, empty responses, malformed JSON.
-- Cost and safety: token limits, retries, logging without sensitive data.
+- Evaluation scaffolding: representative fixtures, expected output properties,
+  edge cases, and live evaluation kept separate from normal verification.
+- Cost and safety: token limits, retries, step caps, opt-in high-cost modes,
+  visible limits, and logging without sensitive data.
 
 ## RAG Projects
 
@@ -67,10 +81,12 @@ Use these user-facing audit families in reports and backlog items:
 ## Workflow and Automation Projects
 
 - Trigger conditions and idempotency.
-- Error handling, retries, and dead-letter paths.
+- Error handling, retries, failure branches, and dead-letter paths.
+- Explicit state transitions and human approval points for high-risk actions.
+- Active run, session, concurrent workflow, stop, restart, and recovery behavior.
 - Credential isolation.
 - Dry-run or fake-service mode.
-- Observability: logs, run IDs, summaries.
+- Observability: logs, run IDs, summaries, and reports.
 - Rollback or manual recovery notes.
 
 ## Backlog Prioritization

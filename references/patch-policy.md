@@ -25,6 +25,15 @@ A patch must have one primary purpose. Do not combine:
 If verification setup is missing, add minimal verification first as its own patch
 or as the clearly bounded setup step before the requested safe refactor.
 
+## Finding, Patch, Commit, And PR Relationship
+
+- One pull request may contain multiple commits.
+- One commit should map to one coherent remediation area.
+- Independent findings should normally be separate commits.
+- Documentation or run-report commits should be separate when generated.
+- If several findings are combined, explain why they are inseparable.
+- If a patch crosses size or scope thresholds, split it or justify why not.
+
 ## Patch Size Thresholds
 
 Treat a patch as too large and split it when it crosses any of these thresholds:
@@ -45,6 +54,7 @@ required whenever failure would be hard to understand or revert manually.
 
 Confirm:
 
+- Requirements Ledger must-have items that affect the patch
 - files likely affected
 - risk level
 - characterization requirement

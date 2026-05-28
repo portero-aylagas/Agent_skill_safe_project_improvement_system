@@ -24,27 +24,33 @@ small patches.
 - Files changed:
 - Out of scope:
 
+## Requirements Ledger
+
+| Requirement | Source | Must/Should | Planned Evidence Or Verification | Status Or Deferral |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
 ## Characterization
 
 - Existing tests or checks used:
 - New characterization added:
 - Manual checklist, if used:
 
-## Findings By Audit Family
+## Engineering Audits Table
 
-```text
-Engineering Audits
-- Audit Area
-  - Severity
-    - Finding
+| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
+| --- | --- | --- | --- | --- | --- | --- |
+|  | Yes/No | High/Medium/Low/Info/None |  |  |  |  |
 
-AI System Audits
-- Audit Area
-  - Severity
-    - Finding
-```
+## AI System Audits Table
 
-Selected areas with no issues should say `No material findings`.
+| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
+| --- | --- | --- | --- | --- | --- | --- |
+|  | Yes/No | High/Medium/Low/Info/None |  |  |  |  |
+
+Every known audit area should appear in the relevant table. Areas with no issues
+should say `No material findings`. Areas not checked should use `Checked? = No`
+and explain why.
 
 ## Backlog
 
@@ -58,6 +64,23 @@ Selected areas with no issues should say `No material findings`.
 - Why this is one patch:
 - Behavior changed:
 - Public API, schema, prompt, or dependency changed:
+- Findings remediated:
+- Findings deferred and why:
+
+## Pre-Publish Gate
+
+Complete this section for Full Automation or other commit/push/pull request
+work. Use `N/A` when no publish action is in scope.
+
+- Selected findings mapped to code, tests, docs, or deferral:
+- Requirements Ledger must-have items satisfied or deferred:
+- Run report required and present:
+- Commit strategy:
+- Patch size/scope thresholds respected or justified:
+- Pull request summary and verification ready:
+- No fake issue references or placeholder metadata:
+- CI result checked after push:
+- Final handoff after process artifacts complete:
 
 ## Verification
 

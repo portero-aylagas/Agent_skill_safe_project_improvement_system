@@ -37,10 +37,18 @@ inspect -> characterize -> verify setup -> audit -> backlog -> one patch -> veri
 Do not start by refactoring. Inspect the current project structure, behavior,
 tests, configuration, and entry points first.
 
+Before audit, backlog, patch selection, or Full Automation work, build a short
+Requirements Ledger from the user request, selected mode, repo-local
+instructions, skill rules, approval boundaries, and user-provided audit/backlog
+context. Must-have requirements need planned evidence or verification, and
+deferrals need a reason.
+
 Before findings, backlog, or patch selection, make audit scope visible. State
 selected and skipped audit areas, explain why they apply, and group findings by
 audit family, audit area, then severity. Use `Engineering Audits` and
-`AI System Audits` as the user-facing audit families.
+`AI System Audits` as the user-facing audit families. Audit/review outputs must
+use exactly two main findings tables: `Engineering Audits Table` and
+`AI System Audits Table`.
 
 ## One-Patch Policy
 
@@ -84,3 +92,10 @@ next diagnostic step.
 
 Do not push, install hooks, add strict CI, or make live API calls unless the user
 explicitly authorizes that action.
+
+In Full Automation Mode, run the pre-publish gate before commit, push, or pull
+request creation/update: map findings to code/tests/docs/deferrals, recheck the
+Requirements Ledger, confirm any required run report, state commit strategy,
+respect or justify patch thresholds, prepare a real pull request summary and
+verification, reject fake issue references or placeholder metadata, check CI
+after push, and hand off only after process artifacts are complete.

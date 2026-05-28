@@ -13,6 +13,10 @@ evaluation findings to the focused areas below.
 multi-step AI/tool execution, retries, state transitions, approval points, logs,
 run IDs, recovery paths, and cost controls.
 
+Use each section heading below as a known `AI System Audits` area when filling
+the AI System Audits Table. If an area is not relevant or not checked, keep it
+in the table with `Checked?` set to `No` and explain why.
+
 ## AI Software Architecture
 
 Check:
@@ -131,6 +135,27 @@ Return:
 - minimal improvements
 - what would be over-engineering
 
+## AI Evaluation Scaffolding
+
+Check:
+
+- representative fixtures exist where AI output quality matters
+- expected output properties are documented
+- malformed, empty, and edge cases are tested where appropriate
+- live evaluation is separate from normal verification
+- subjective output quality has manual review notes or lightweight criteria
+  where needed
+- evaluation expectations are proportional to the project and do not require a
+  heavy platform by default
+
+Return:
+
+- current fixture and evaluation coverage
+- expected output properties or quality criteria
+- missing edge cases
+- normal verification versus live evaluation boundary
+- smallest useful evaluation smoke test or manual review checklist
+
 ## Agents And Tools
 
 Check:
@@ -158,6 +183,8 @@ Check:
 - explicit state, node responsibilities, and conditional routing
 - deterministic business rules separated from model calls
 - human approval points for high-risk actions
+- active run, session, and concurrent workflow behavior
+- stop, restart, and recovery behavior
 - workflow path tracking, logs, run IDs, and reports
 - setup, credentials, and validation prompts or commands
 
@@ -166,6 +193,7 @@ Return:
 - workflow summary
 - state or node issues
 - reliability and traceability risks
+- concurrency and recovery risks
 - evidence gaps
 - minimal improvements
 
@@ -197,11 +225,18 @@ Check:
 - stale hardcoded pricing
 - total requests, tokens, cost, and visible budget warnings
 - whether usage tracking is mixed into business logic
+- max retries, max steps, timeouts, token limits, or equivalent caps for paid or
+  looping AI workflows
+- high-cost modes require explicit opt-in
+- configured limits are visible enough for review and debugging
+- invalid config values do not silently fall back to dangerous high limits
+- cost and usage tracking are proportional to the project
 
 Return:
 
 - current usage tracking summary
 - whether tracking is necessary
 - inaccuracies or missing visibility
+- missing execution caps or risky defaults
 - minimal improvements
 - what would be unnecessary for a small project

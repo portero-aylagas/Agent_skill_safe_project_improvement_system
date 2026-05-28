@@ -57,6 +57,37 @@ make verify
 Verification should normally include import/compile checks and tests. It must not
 require live API keys.
 
+## Requirements Ledger
+
+Before audit, backlog, patch selection, or Full Automation work, build a short
+Requirements Ledger. This is an operational checklist, not a PRD.
+
+Extract ledger rows from:
+
+- the user request
+- selected mode
+- repo-local instructions such as `AGENTS.md`
+- skill rules
+- explicit approval boundaries
+- previous audit findings or backlog items, if the user provided them
+
+Use this shape:
+
+| Requirement | Source | Must/Should | Planned Evidence Or Verification | Status Or Deferral |
+| --- | --- | --- | --- | --- |
+|  |  |  |  |  |
+
+Rules:
+
+- Must-have requirements need planned evidence or verification before work
+  proceeds.
+- If a requirement is deferred, state why in `Status Or Deferral`.
+- Keep the ledger short and operational. Do not turn it into a project
+  requirements document.
+- In Review Mode, the ledger can be shown briefly before the audit tables.
+- In Full Automation Mode, check the ledger again before commit, push, or pull
+  request creation/update.
+
 ## Audit Scope Gate
 
 Before audit, backlog, or patch selection in any mode, make the audit scope
@@ -93,27 +124,34 @@ When reviewing software engineering quality, assess conformance to
 `coding-standards.md`; it is the source of truth for code-level standards.
 
 Group findings by audit family, then audit area, then severity. Do not return a
-single mixed severity list. Selected areas with no issues should say
-`No material findings`.
+single mixed severity list.
 
-Use this finding shape:
+Every audit or review output must include exactly two main findings tables, in
+this order:
 
-```text
-Findings By Audit Family
+## Engineering Audits Table
 
-Engineering Audits
-- Security And Secrets
-  - High
-    - Finding...
+| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
+| --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |
 
-AI System Audits
-- AI Software Architecture
-  - Medium
-    - Finding...
-- Prompt Quality
-  - Medium
-    - Finding...
-```
+## AI System Audits Table
+
+| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
+| --- | --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  |  |  |
+
+Rules:
+
+- Every known audit area must appear in the relevant table.
+- If an area was not checked, set `Checked?` to `No`, set `Severity` to `None`,
+  and explain why in `Finding`.
+- If an area was checked and has no material findings, set `Checked?` to `Yes`,
+  set `Severity` to `None`, and write `No material findings`.
+- Use severity values consistently: `High`, `Medium`, `Low`, `Info`, or `None`.
+- Do not return only a free-text findings list. Brief narrative summaries are
+  allowed before or after the two main findings tables.
+- Backlog items should trace to table rows.
 
 ## Step 5: Backlog
 
@@ -158,6 +196,8 @@ For low-risk local patches, the final chat report is usually enough.
 
 Use when the user asks for audit, review, assessment, backlog, or planning.
 Pass through the Audit Scope Gate before producing findings or backlog items.
+Show the Requirements Ledger briefly before the two main audit tables when it
+helps make user requirements, mode constraints, or approval boundaries clear.
 
 Always load:
 
@@ -167,8 +207,9 @@ Always load:
 
 For software engineering quality reviews, also load
 `references/engineering-audits.md`. For AI System Audits, also load
-`references/ai-workflow-audits.md` or
-`references/ai-integration-quality.md`.
+`references/ai-workflow-audits.md`; use
+`references/ai-integration-quality.md` as extra implementation guidance when
+working directly on model/provider, prompt, RAG, or evaluation code.
 
 Allowed:
 
@@ -214,6 +255,7 @@ Allowed after approval:
 - make one small patch
 - commit
 - push
+- create or update a pull request when explicitly approved
 - wait for CI
 - report CI result
 
@@ -222,3 +264,15 @@ Still required:
 - no live API keys in normal verification
 - no unrelated cleanup
 - stop on verification failure
+
+Before commit, push, or pull request creation/update, run a pre-publish gate:
+
+- all selected findings are mapped to code, tests, docs, or explicit deferral
+- Requirements Ledger must-have items are satisfied or explicitly deferred
+- run report exists when required
+- commit strategy is explicit
+- patch size/scope thresholds are respected or justified
+- pull request body has summary and verification
+- pull request body contains no fake issue references or placeholder metadata
+- CI result is checked after push
+- final handoff happens only after process artifacts are complete

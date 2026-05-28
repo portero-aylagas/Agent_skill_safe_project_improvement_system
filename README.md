@@ -47,11 +47,17 @@ Do not blindly overwrite an existing `AGENTS.md`, `Makefile`, `verify.sh`, or
 | --- | --- | --- |
 | **Review Mode** | You want an audit, assessment, plan, or prioritized backlog. | Inspect files, run safe read-only checks, run existing verification when useful, and return findings. It must not edit files. |
 | **Local Safe Refactor Mode** | You want one local improvement made safely. | Inspect, confirm or add verification, characterize risky behavior, apply one small patch, run verification, and stop. |
-| **Full Automation Mode** | You explicitly approve branch, commit, push, and CI follow-up work. | Create a branch, patch, commit, push, wait for CI, and report. Use only after explicit approval. |
+| **Full Automation Mode** | You explicitly approve branch, commit, push, pull request, and CI follow-up work. | Create a branch, patch, commit, push, wait for CI, and report. Use only after explicit approval. |
+
+All modes build a lightweight Requirements Ledger before audit, backlog, patch,
+or Full Automation work. It is a short operational checklist extracted from the
+user request, selected mode, repo-local instructions, skill rules, approval
+boundaries, and user-provided audit/backlog context.
 
 All modes pass through the Audit Scope Gate before findings, backlog, or patch
-selection. The agent should state selected and skipped audit areas, explain why
-they apply, and group findings by audit family, audit area, then severity.
+selection. The agent should state selected and skipped audit areas and explain
+why they apply. Audit/review output must use exactly two main findings tables:
+`Engineering Audits Table` and `AI System Audits Table`.
 
 ### 3. Paste a prompt
 
@@ -96,6 +102,7 @@ Use full automation only after approving branch, commit, push, and CI work:
 Use the safe project improvement system in full automation mode.
 Create a focused branch, confirm verification, make one small safe patch, commit,
 push, wait for CI, and report the result.
+Run the pre-publish gate before commit, push, or PR creation/update.
 Stop if verification or CI fails.
 ```
 
@@ -114,7 +121,9 @@ Do not replace existing local instruction files; merge or adapt carefully.
 The agent should:
 
 - inspect before editing
+- track must-have requirements and deferrals in a short Requirements Ledger
 - make audit scope visible before findings, backlog, or patch selection
+- report audits using the two required audit tables
 - characterize current behavior before medium/high-risk changes
 - keep each patch focused and small
 - verify locally after each patch
@@ -149,10 +158,14 @@ testable, and safe to change.
 | Function Responsibility | Find functions that do too many jobs, hide side effects, or have names that do not match behavior. |
 | Error Handling | Look for swallowed exceptions, unclear messages, and user/API/file failures that crash instead of failing clearly. |
 | Testability | Identify code that is hard to test because it is coupled to live services, environment variables, files, or UI frameworks. |
+| Reproducibility And Dependency Discipline | Check dependency files, Python version declarations, pinning or lock strategy, CI/local install alignment, and future breakage risk from floating requirements. |
+| CI Maturity | Check whether baseline CI runs local verification without live secrets and whether stronger checks are proportional to repository maturity. |
 | Data And JSON Validation | Check whether uploaded files, JSON, CSV, API responses, and model outputs are validated before moving through the system. |
+| Artifact/File Collision Safety | Check whether generated and uploaded files can silently overwrite unrelated files and whether automatic names are collision-resistant when needed. |
+| User-Controlled File/Path Safety | Check whether user-provided paths, uploads, artifact paths, and config paths are validated before sensitive use. |
 | Repository Hygiene | Find generated files, caches, missing `.gitignore` rules, confusing duplicate files, or unclear dependency setup. |
-| Documentation And Reviewer Evidence | Check whether a new reviewer can understand setup, run commands, verification, public APIs, and known limitations. |
-| Security And Secrets | Look for hardcoded secrets, unsafe paths, risky uploads, sensitive logs, SSRF-style URL risks, and prompt injection surfaces. |
+| Process And Reviewer Evidence | Check whether setup, run commands, verification, run reports, commits, pull request bodies, known limitations, and reviewer evidence are accurate. |
+| Security And Secrets | Look for hardcoded secrets, risky uploads, sensitive logs, external-resource risks, and prompt injection surfaces. |
 
 ### AI System Audits
 
@@ -167,10 +180,11 @@ multi-step AI automation.
 | Structured Output | Check whether model output should be validated JSON/schema instead of fragile free text. |
 | LLM/API Integration | Review provider boundaries, credentials, model settings, retries, timeouts, token limits, and fake-client testability. |
 | RAG And Retrieval | Check document loading, chunking, embeddings, retrieval quality, empty-result behavior, and fixture-based evaluation. |
+| AI Evaluation Scaffolding | Check representative fixtures, expected output properties, edge cases, live-eval separation, and lightweight manual criteria where useful. |
 | Agents And Tools | Review whether an agent is justified, whether tools have clear names/inputs/outputs, and how failures are recovered. |
-| Workflow Automation | Check multi-step AI/tool flows: triggers, idempotency, retries, state transitions, approvals, logs, run IDs, recovery, and cost controls. |
+| Workflow Automation | Check multi-step AI/tool flows: triggers, idempotency, retries, failure branches, state transitions, approvals, concurrent runs, logs, run IDs, recovery, and reports. |
 | Speech Pipelines | Review audio loading, transcription prompts, chunking, timestamps, generated audio validation, and safe output naming. |
-| Cost And Usage | Check whether token/request usage, budgets, pricing assumptions, and visible warnings are appropriate for the project. |
+| Cost And Usage | Check execution caps, retries, timeouts, token limits, high-cost opt-ins, visible limits, and proportional usage tracking. |
 
 `AI System Audits` covers AI software architecture, prompts, model/API
 integrations, RAG, agents, tools, speech, cost, and multi-step AI/tool

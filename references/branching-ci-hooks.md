@@ -49,6 +49,22 @@ CI must not require live secrets for normal checks. Use fake clients and local
 fixtures. Live integration checks should be separate, clearly named, and gated by
 explicit secrets.
 
+Keep CI proportional to repository maturity. For non-trivial apps, consider
+type checking, coverage, dependency audit, or AI/evaluation smoke tests when
+they provide real review value. Do not force heavy production CI on small
+projects.
+
+## Commit And Pull Request Structure
+
+- One pull request may contain multiple commits.
+- One commit should map to one coherent remediation area.
+- Independent findings should normally be separate commits.
+- Documentation or run-report commits should be separate when generated.
+- If several findings are combined, explain why they are inseparable.
+- Pull request bodies must summarize the actual remediation and verification.
+- Reject fake issue references, placeholder metadata, and inaccurate review
+  evidence.
+
 ## Full Automation Checklist
 
 1. Confirm explicit approval.
@@ -57,7 +73,22 @@ explicit secrets.
 4. Add characterization before risky changes.
 5. Make one patch.
 6. Run local verification.
-7. Commit only relevant files.
-8. Push.
-9. Wait for CI.
-10. Report result and next backlog item.
+7. Run the pre-publish gate.
+8. Commit only relevant files.
+9. Push.
+10. Wait for CI.
+11. Report result and next backlog item.
+
+## Pre-Publish Gate
+
+Before commit, push, or pull request creation/update, confirm:
+
+- all selected findings are mapped to code, tests, docs, or explicit deferral
+- Requirements Ledger must-have items are satisfied or explicitly deferred
+- run report exists when required
+- commit strategy is explicit
+- patch size/scope thresholds are respected or justified
+- pull request body has summary and verification
+- pull request body contains no fake issue references or placeholder metadata
+- CI result is checked after push
+- final handoff happens only after process artifacts are complete
