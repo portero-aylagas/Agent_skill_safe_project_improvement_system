@@ -12,8 +12,8 @@ Do not edit files.
 
 - Requirements Ledger: short table with must/should requirements, planned
   evidence or verification, and status/deferral.
-- Audit scope: selected and skipped audit families and areas, with why each
-  selected area applies.
+- Audit scope: selected audit families and areas, with why each selected area
+  applies. Skipped-area details appear only in the skipped-area sections.
 - Current behavior summary: entry points, verification, tests, config,
   live-service boundaries.
 - Readable audit-area blocks. Example blocks are shown below; a real review
@@ -25,17 +25,27 @@ Required block shape:
 ```markdown
 ## <Audit Area>
 
-- Checked: Yes
-- Severity: High | Medium | Low | Info | None
-- Finding: <finding or "No material findings">
-- Evidence / Location: <files, functions, commands, or "N/A">
-- Recommended Action: <action or "None">
-- Verification: <test, command, review method, or "N/A">
+- Severity: High | Medium | Low | Info
+- Finding: <finding>
+- Evidence / Location: <files, functions, commands>
+- Recommended Action: <action>
+- Verification: <test, command, review method>
+
+## <Audit Area>
+
+No material findings.
+
+Evidence:
+
+- <brief evidence, if useful>
+
+Verification:
+
+- <brief verification, if useful>
 ```
 
 ## General Software Architecture
 
-- Checked: Yes
 - Severity: Medium
 - Finding: Finding with impact and minimal fix.
 - Evidence / Location: Exact file/function.
@@ -44,7 +54,6 @@ Required block shape:
 
 ## Security And Secrets
 
-- Checked: Yes
 - Severity: High
 - Finding: Finding with impact and minimal fix.
 - Evidence / Location: Exact file/function.
@@ -53,7 +62,6 @@ Required block shape:
 
 ## Repository Hygiene
 
-- Checked: Yes
 - Severity: Low
 - Finding: Finding with impact and minimal fix.
 - Evidence / Location: Exact file/path.
@@ -66,7 +74,6 @@ Required block shape:
 
 ## AI Software Architecture
 
-- Checked: Yes
 - Severity: Medium
 - Finding: Finding with impact and minimal fix.
 - Evidence / Location: Exact file/function.
@@ -75,7 +82,6 @@ Required block shape:
 
 ## Prompt Quality
 
-- Checked: Yes
 - Severity: Medium
 - Finding: Finding with impact and minimal fix.
 - Evidence / Location: Exact file/function.
@@ -84,12 +90,15 @@ Required block shape:
 
 ## Workflow Automation
 
-- Checked: Yes
-- Severity: None
-- Finding: No material findings
-- Evidence / Location: Inspected workflow entry points.
-- Recommended Action: None
-- Verification: Existing verification.
+No material findings.
+
+Evidence:
+
+- Inspected workflow entry points.
+
+Verification:
+
+- Existing verification.
 
 ## Skipped AI System Areas
 

@@ -4,9 +4,10 @@ Use this reference when `audit-matrix.md` shows that a deeper engineering review
 is useful. Do not run every audit blindly.
 
 Use each section heading below as a known `Engineering Audits` area when writing
-block-based audit findings. Checked areas must appear as full blocks, even when
-there are no material findings. Areas that are not relevant or not checked belong
-under `Skipped Engineering Areas` with a reason.
+block-based audit findings. Checked areas with findings must use full field
+blocks; checked areas with no material findings must use the compact
+`No material findings.` form. Areas that are not relevant or not checked belong
+only under `Skipped Engineering Areas` with a reason.
 
 ## General Software Architecture
 

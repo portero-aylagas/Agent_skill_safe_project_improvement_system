@@ -74,7 +74,7 @@ PROTOCOL_REQUIREMENTS = [
 AUDIT_SCOPE_REQUIREMENTS = [
     "## Audit Scope Gate",
     "selected audit families and areas",
-    "skipped audit families and areas",
+    "that skipped audit areas, if any, are listed only in the relevant skipped-area",
     "`Engineering Audits`",
     "`AI System Audits`",
     "Group findings by audit family, then audit area, then severity.",
@@ -249,22 +249,39 @@ def check_audit_scope_requirements() -> list[str]:
         "assets/run-report-template.md": docs["assets/run-report-template.md"],
     }
     required_block_fields = [
-        "- Checked: Yes",
-        "- Severity: High | Medium | Low | Info | None",
-        '- Finding: <finding or "No material findings">',
-        '- Evidence / Location: <files, functions, commands, or "N/A">',
-        '- Recommended Action: <action or "None">',
-        '- Verification: <test, command, review method, or "N/A">',
+        "- Severity: High | Medium | Low | Info",
+        "- Finding: <finding>",
+        "- Evidence / Location: <files, functions, commands>",
+        "- Recommended Action: <action>",
+        "- Verification: <test, command, review method>",
+        "No material findings.",
+        "Evidence:",
+        "Verification:",
         "## Skipped Engineering Areas",
         "## Skipped AI System Areas",
     ]
+    disallowed_old_audit_markers = [
+        "Checked" + ": Yes",
+        "Severity" + ": None",
+        "Recommended Action" + ": None",
+        "Severity: High | Medium | Low | Info | " + "None",
+        "Finding: <finding or " + '"No material findings">',
+        'or "' + "N/A" + '"',
+        "skipped audit families " + "and areas",
+        "Audit families and areas " + "skipped:",
+    ]
     disallowed_finding_table_marker = (
-        "| Audit Area | Checked? | Severity | Finding |"
+        "| Audit Area | " + "Checked" + "? | Severity | Finding |"
     )
     for relative_path, text in block_docs.items():
         for field in required_block_fields:
             if field not in text:
                 errors.append(f"{relative_path} missing audit block field: {field}")
+        for marker in disallowed_old_audit_markers:
+            if marker in text:
+                errors.append(
+                    f"{relative_path} still uses old audit marker: {marker}"
+                )
         if disallowed_finding_table_marker in text:
             errors.append(f"{relative_path} still uses a findings table")
     return errors

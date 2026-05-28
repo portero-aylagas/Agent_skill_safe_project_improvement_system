@@ -10,31 +10,57 @@ Keep this ledger short. Include only requirements that affect audit scope,
 backlog selection, patch boundaries, verification, approval, conflict handling,
 or deferral.
 
-Engineering Audits: repeat one block for every checked Engineering area.
+Engineering Audits: repeat the finding block for checked Engineering areas with
+findings, or the compact block for checked Engineering areas with no material
+findings.
 
 ## <Audit Area>
 
-- Checked: Yes
-- Severity: High | Medium | Low | Info | None
-- Finding: <finding or "No material findings">
-- Evidence / Location: <files, functions, commands, or "N/A">
-- Recommended Action: <action or "None">
-- Verification: <test, command, review method, or "N/A">
+- Severity: High | Medium | Low | Info
+- Finding: <finding>
+- Evidence / Location: <files, functions, commands>
+- Recommended Action: <action>
+- Verification: <test, command, review method>
+
+## <Audit Area>
+
+No material findings.
+
+Evidence:
+
+- <brief evidence, if useful>
+
+Verification:
+
+- <brief verification, if useful>
 
 ## Skipped Engineering Areas
 
 - <Audit Area>: <reason>
 
-AI System Audits: repeat one block for every checked AI System area.
+AI System Audits: repeat the finding block for checked AI System areas with
+findings, or the compact block for checked AI System areas with no material
+findings.
 
 ## <Audit Area>
 
-- Checked: Yes
-- Severity: High | Medium | Low | Info | None
-- Finding: <finding or "No material findings">
-- Evidence / Location: <files, functions, commands, or "N/A">
-- Recommended Action: <action or "None">
-- Verification: <test, command, review method, or "N/A">
+- Severity: High | Medium | Low | Info
+- Finding: <finding>
+- Evidence / Location: <files, functions, commands>
+- Recommended Action: <action>
+- Verification: <test, command, review method>
+
+## <Audit Area>
+
+No material findings.
+
+Evidence:
+
+- <brief evidence, if useful>
+
+Verification:
+
+- <brief verification, if useful>
 
 ## Skipped AI System Areas
 

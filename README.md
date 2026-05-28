@@ -57,11 +57,13 @@ show it only when it affects scope, approval, backlog selection, Full
 Automation, deferrals, conflicts, or explicit requirements/status reporting.
 
 All modes pass through the Audit Scope Gate before findings, backlog, or patch
-selection. The agent should state selected and skipped audit areas and explain
-why they apply. Readable audit-area blocks are the canonical audit format and are
+selection. The agent should state selected audit areas and explain why they
+apply; skipped-area details belong only in the relevant skipped-area sections.
+Readable audit-area blocks are the canonical audit format and are
 mandatory for Review Mode, audit outputs, persistent backlog outputs, and run
-reports that include audit findings. Checked areas must appear even when there
-are no material findings, and skipped areas are listed separately with reasons.
+reports that include audit findings. Checked areas with findings use the full
+field block, checked areas with no material findings use the compact form, and
+skipped areas are listed separately with reasons.
 Tables may only be used for short metadata summaries, not detailed findings. A
 trivial Local Safe Refactor Mode patch can report the selected audit area and
 verification without printing full audit blocks unless the user requested review

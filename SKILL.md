@@ -61,8 +61,9 @@ only when it affects scope, approval, backlog selection, Full Automation,
 deferrals, conflicts, or the user asks for requirements/status.
 
 All modes pass through an Audit Scope Gate before findings, backlog, or patch
-selection. Make selected and skipped audit areas visible and explain what will be
-checked and why it applies. The canonical audit/report format uses readable
+selection. Make selected audit areas visible and explain what will be checked
+and why it applies; list skipped-area details only in the relevant skipped-area
+sections. The canonical audit/report format uses readable
 blocks for every checked `Engineering Audits` or `AI System Audits` area,
 followed by `Skipped Engineering Areas` and `Skipped AI System Areas` sections.
 This block format is mandatory for Review Mode, audit outputs, persistent
@@ -157,7 +158,7 @@ Use `assets/` as project templates, adapting them to the target repository:
 
 When work is complete, report:
 
-- audit scope selected and skipped
+- audit scope selected, with skipped-area details only in skipped sections
 - Requirements Ledger status for must-have items and deferrals
 - mode used
 - files changed

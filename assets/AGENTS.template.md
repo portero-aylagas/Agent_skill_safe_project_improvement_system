@@ -46,8 +46,9 @@ backlog selection, Full Automation, deferrals, conflicts, or explicit
 requirements/status reporting.
 
 Before findings, backlog, or patch selection, make audit scope visible. State
-selected and skipped audit areas, explain why they apply, and group findings by
-audit family, audit area, then severity. Use `Engineering Audits` and
+selected audit areas, explain why they apply, and group findings by
+audit family, audit area, then severity. List skipped-area details only in the
+relevant skipped-area sections. Use `Engineering Audits` and
 `AI System Audits` as the user-facing audit families. Use readable audit-area
 blocks for Review Mode, audit outputs, persistent backlog outputs, and run
 reports that include audit findings. Do not use wide Markdown tables for audit

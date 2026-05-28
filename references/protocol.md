@@ -113,9 +113,10 @@ First inspect enough project structure to choose relevant audit areas. Then
 report:
 
 - selected audit families and areas
-- skipped audit families and areas
 - what each selected area checks
 - why each selected area applies to this repository
+- that skipped audit areas, if any, are listed only in the relevant skipped-area
+  section
 
 Ask the user to choose the scope unless the prompt already gives explicit scope.
 If interaction is unavailable, proceed with the recommended relevant scope and
@@ -152,16 +153,30 @@ multiple audit areas. If only one focused patch is implemented, the agent may
 report the selected audit area and verification without printing every checked
 audit area block.
 
-For every checked `Engineering Audits` area, list one block:
+For every checked `Engineering Audits` area with findings, list one block:
 
 ## <Audit Area>
 
-- Checked: Yes
-- Severity: High | Medium | Low | Info | None
-- Finding: <finding or "No material findings">
-- Evidence / Location: <files, functions, commands, or "N/A">
-- Recommended Action: <action or "None">
-- Verification: <test, command, review method, or "N/A">
+- Severity: High | Medium | Low | Info
+- Finding: <finding>
+- Evidence / Location: <files, functions, commands>
+- Recommended Action: <action>
+- Verification: <test, command, review method>
+
+For every checked `Engineering Audits` area with no material findings, use the
+compact form:
+
+## <Audit Area>
+
+No material findings.
+
+Evidence:
+
+- <brief evidence, if useful>
+
+Verification:
+
+- <brief verification, if useful>
 
 After all checked `Engineering Audits` areas, add:
 
@@ -169,16 +184,30 @@ After all checked `Engineering Audits` areas, add:
 
 - <Audit Area>: <reason>
 
-For every checked `AI System Audits` area, list one block:
+For every checked `AI System Audits` area with findings, list one block:
 
 ## <Audit Area>
 
-- Checked: Yes
-- Severity: High | Medium | Low | Info | None
-- Finding: <finding or "No material findings">
-- Evidence / Location: <files, functions, commands, or "N/A">
-- Recommended Action: <action or "None">
-- Verification: <test, command, review method, or "N/A">
+- Severity: High | Medium | Low | Info
+- Finding: <finding>
+- Evidence / Location: <files, functions, commands>
+- Recommended Action: <action>
+- Verification: <test, command, review method>
+
+For every checked `AI System Audits` area with no material findings, use the
+compact form:
+
+## <Audit Area>
+
+No material findings.
+
+Evidence:
+
+- <brief evidence, if useful>
+
+Verification:
+
+- <brief verification, if useful>
 
 After all checked `AI System Audits` areas, add:
 
@@ -189,13 +218,14 @@ After all checked `AI System Audits` areas, add:
 Rules:
 
 - Do not omit checked areas.
-- Checked areas with no findings must still appear with `Severity: None` and
-  `Finding: No material findings`.
+- Checked areas with no material findings must still appear in the compact form.
+- Do not include the old checked marker, none-severity placeholder, or empty
+  recommended-action placeholder.
 - Skipped areas do not need full blocks. List them only under the relevant
   skipped-area section with a reason.
 - If no areas were skipped for a family, write
   `- None: all relevant areas were checked`.
-- Use severity values consistently: `High`, `Medium`, `Low`, `Info`, or `None`.
+- Use severity values consistently: `High`, `Medium`, `Low`, or `Info`.
 - Tables may only be used for short metadata summaries, not detailed findings.
 - Do not return only a free-text findings list. Brief narrative summaries are
   allowed before or after the audit blocks.

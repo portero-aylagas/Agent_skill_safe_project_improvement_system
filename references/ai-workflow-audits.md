@@ -14,9 +14,10 @@ multi-step AI/tool execution, retries, state transitions, approval points, logs,
 run IDs, recovery paths, and cost controls.
 
 Use each section heading below as a known `AI System Audits` area when writing
-block-based audit findings. Checked areas must appear as full blocks, even when
-there are no material findings. Areas that are not relevant or not checked belong
-under `Skipped AI System Areas` with a reason.
+block-based audit findings. Checked areas with findings must use full field
+blocks; checked areas with no material findings must use the compact
+`No material findings.` form. Areas that are not relevant or not checked belong
+only under `Skipped AI System Areas` with a reason.
 
 ## AI Software Architecture
 
