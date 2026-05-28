@@ -13,9 +13,10 @@ evaluation findings to the focused areas below.
 multi-step AI/tool execution, retries, state transitions, approval points, logs,
 run IDs, recovery paths, and cost controls.
 
-Use each section heading below as a known `AI System Audits` area when filling
-the AI System Audits Table. If an area is not relevant or not checked, keep it
-in the table with `Checked?` set to `No` and explain why.
+Use each section heading below as a known `AI System Audits` area when writing
+block-based audit findings. Checked areas must appear as full blocks, even when
+there are no material findings. Areas that are not relevant or not checked belong
+under `Skipped AI System Areas` with a reason.
 
 ## AI Software Architecture
 

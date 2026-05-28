@@ -62,13 +62,14 @@ deferrals, conflicts, or the user asks for requirements/status.
 
 All modes pass through an Audit Scope Gate before findings, backlog, or patch
 selection. Make selected and skipped audit areas visible and explain what will be
-checked and why it applies. The canonical audit/report format uses two main
-findings tables: `Engineering Audits Table` and `AI System Audits Table`. These
-tables are mandatory for Review Mode, audit outputs, persistent backlog outputs,
-and run reports that include audit findings. Local Safe Refactor Mode may report
-only the selected audit area and verification for one focused patch unless the
-user requested a review/audit, a backlog is produced, or multiple audit areas
-drive patch selection.
+checked and why it applies. The canonical audit/report format uses readable
+blocks for every checked `Engineering Audits` or `AI System Audits` area,
+followed by `Skipped Engineering Areas` and `Skipped AI System Areas` sections.
+This block format is mandatory for Review Mode, audit outputs, persistent
+backlog outputs, and run reports that include audit findings. Local Safe
+Refactor Mode may report only the selected audit area and verification for one
+focused patch unless the user requested a review/audit, a backlog is produced,
+or multiple audit areas drive patch selection.
 
 ## Non-Negotiable Rules
 
@@ -82,8 +83,9 @@ drive patch selection.
 - Use fake clients/mocks for AI/API tests.
 - Normal verification must not require live API keys.
 - Review Mode, audit outputs, persistent backlog outputs, and run reports with
-  audit findings must use the two required audit tables, not only a free-text
-  findings list.
+  audit findings must use the required block-based audit format, not wide
+  Markdown tables and not only a free-text findings list. Tables may only be used
+  for short metadata summaries, not detailed findings.
 - Full Automation Mode must pass the pre-publish gate before commit, push, or
   pull request creation/update.
 - Stop if verification fails.
@@ -159,7 +161,7 @@ When work is complete, report:
 - Requirements Ledger status for must-have items and deferrals
 - mode used
 - files changed
-- findings in the two required audit tables
+- findings in the required block-based audit format
 - characterization added or confirmed
 - verification command and result
 - any stopped work, failed verification, or approval needed

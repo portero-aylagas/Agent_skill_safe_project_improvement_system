@@ -3,9 +3,10 @@
 Use this reference when `audit-matrix.md` shows that a deeper engineering review
 is useful. Do not run every audit blindly.
 
-Use each section heading below as a known `Engineering Audits` area when filling
-the Engineering Audits Table. If an area is not relevant or not checked, keep it
-in the table with `Checked?` set to `No` and explain why.
+Use each section heading below as a known `Engineering Audits` area when writing
+block-based audit findings. Checked areas must appear as full blocks, even when
+there are no material findings. Areas that are not relevant or not checked belong
+under `Skipped Engineering Areas` with a reason.
 
 ## General Software Architecture
 

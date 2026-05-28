@@ -16,26 +16,84 @@ Do not edit files.
   selected area applies.
 - Current behavior summary: entry points, verification, tests, config,
   live-service boundaries.
-- Exactly two main findings tables. Example rows are shown below; a real review
-  includes every known audit area in the relevant table:
+- Readable audit-area blocks. Example blocks are shown below; a real review
+  includes every checked `Engineering Audits` and `AI System Audits` area, even
+  when there are no material findings:
 
-## Engineering Audits Table
+Required block shape:
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-| General Software Architecture | Yes | Medium | Finding with impact and minimal fix. | Exact file/function. | Minimal action. | Verification command or check. |
-| Security And Secrets | Yes | High | Finding with impact and minimal fix. | Exact file/function. | Minimal action. | Verification command or check. |
-| Repository Hygiene | Yes | Low | Finding with impact and minimal fix. | Exact file/path. | Minimal action. | Verification command or check. |
-| CI Maturity | No | None | Not checked because the repository has no CI files. | N/A | Add CI only if requested or appropriate. | N/A |
+```markdown
+## <Audit Area>
 
-## AI System Audits Table
+- Checked: Yes
+- Severity: High | Medium | Low | Info | None
+- Finding: <finding or "No material findings">
+- Evidence / Location: <files, functions, commands, or "N/A">
+- Recommended Action: <action or "None">
+- Verification: <test, command, review method, or "N/A">
+```
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-| AI Software Architecture | Yes | Medium | Finding with impact and minimal fix. | Exact file/function. | Minimal action. | Fake-client test or smoke check. |
-| Prompt Quality | Yes | Medium | Finding with impact and minimal fix. | Exact file/function. | Minimal action. | Prompt fixture or review check. |
-| Workflow Automation | Yes | None | No material findings. | Inspected workflow entry points. | None. | Existing verification. |
-| Speech Pipelines | No | None | Not checked because the repository has no speech pipeline. | N/A | None. | N/A |
+## General Software Architecture
+
+- Checked: Yes
+- Severity: Medium
+- Finding: Finding with impact and minimal fix.
+- Evidence / Location: Exact file/function.
+- Recommended Action: Minimal action.
+- Verification: Verification command or check.
+
+## Security And Secrets
+
+- Checked: Yes
+- Severity: High
+- Finding: Finding with impact and minimal fix.
+- Evidence / Location: Exact file/function.
+- Recommended Action: Minimal action.
+- Verification: Verification command or check.
+
+## Repository Hygiene
+
+- Checked: Yes
+- Severity: Low
+- Finding: Finding with impact and minimal fix.
+- Evidence / Location: Exact file/path.
+- Recommended Action: Minimal action.
+- Verification: Verification command or check.
+
+## Skipped Engineering Areas
+
+- CI Maturity: Not checked because the repository has no CI files.
+
+## AI Software Architecture
+
+- Checked: Yes
+- Severity: Medium
+- Finding: Finding with impact and minimal fix.
+- Evidence / Location: Exact file/function.
+- Recommended Action: Minimal action.
+- Verification: Fake-client test or smoke check.
+
+## Prompt Quality
+
+- Checked: Yes
+- Severity: Medium
+- Finding: Finding with impact and minimal fix.
+- Evidence / Location: Exact file/function.
+- Recommended Action: Minimal action.
+- Verification: Prompt fixture or review check.
+
+## Workflow Automation
+
+- Checked: Yes
+- Severity: None
+- Finding: No material findings
+- Evidence / Location: Inspected workflow entry points.
+- Recommended Action: None
+- Verification: Existing verification.
+
+## Skipped AI System Areas
+
+- Speech Pipelines: Not checked because the repository has no speech pipeline.
 
 - Backlog: small patch candidates with audit family, audit area, severity, likely
   files, risk level, characterization need, and verification command.

@@ -48,12 +48,13 @@ requirements/status reporting.
 Before findings, backlog, or patch selection, make audit scope visible. State
 selected and skipped audit areas, explain why they apply, and group findings by
 audit family, audit area, then severity. Use `Engineering Audits` and
-`AI System Audits` as the user-facing audit families. Use the two audit tables
-for Review Mode, audit outputs, persistent backlog outputs, and run reports that
-include audit findings. Local Safe Refactor Mode may report only the selected
-audit area and verification for one focused patch unless the user requested a
-review/audit, a backlog is produced, or multiple audit areas drive patch
-selection.
+`AI System Audits` as the user-facing audit families. Use readable audit-area
+blocks for Review Mode, audit outputs, persistent backlog outputs, and run
+reports that include audit findings. Do not use wide Markdown tables for audit
+findings; tables are only for short metadata summaries. Local Safe Refactor Mode
+may report only the selected audit area and verification for one focused patch
+unless the user requested a review/audit, a backlog is produced, or multiple
+audit areas drive patch selection.
 
 ## One-Patch Policy
 

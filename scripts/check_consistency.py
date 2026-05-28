@@ -78,6 +78,11 @@ AUDIT_SCOPE_REQUIREMENTS = [
     "`Engineering Audits`",
     "`AI System Audits`",
     "Group findings by audit family, then audit area, then severity.",
+    "Readable block-based audit reporting is the canonical audit/report format.",
+    "Do not use wide Markdown tables for audit findings",
+    "## Skipped Engineering Areas",
+    "## Skipped AI System Areas",
+    "Tables may only be used for short metadata summaries, not detailed findings.",
     "Pass through the Audit Scope Gate",
 ]
 
@@ -211,7 +216,7 @@ def check_protocol_requirements() -> list[str]:
 
 
 def check_audit_scope_requirements() -> list[str]:
-    """Check that mode-wide audit scope guidance stays present.
+    """Check that mode-wide audit scope and reporting guidance stays present.
 
     Returns:
         Human-readable consistency errors.
@@ -220,6 +225,7 @@ def check_audit_scope_requirements() -> list[str]:
         "references/protocol.md": read_text("references/protocol.md"),
         "SKILL.md": read_text("SKILL.md"),
         "README.md": read_text("README.md"),
+        "assets/AGENTS.template.md": read_text("assets/AGENTS.template.md"),
         "examples/review-mode.md": read_text("examples/review-mode.md"),
         "assets/patch-backlog-template.md": read_text(
             "assets/patch-backlog-template.md"
@@ -236,6 +242,31 @@ def check_audit_scope_requirements() -> list[str]:
             errors.append(f"{relative_path} missing Engineering Audits wording")
         if "AI System Audits" not in text:
             errors.append(f"{relative_path} missing AI System Audits wording")
+    block_docs = {
+        "references/protocol.md": protocol,
+        "examples/review-mode.md": docs["examples/review-mode.md"],
+        "assets/patch-backlog-template.md": docs["assets/patch-backlog-template.md"],
+        "assets/run-report-template.md": docs["assets/run-report-template.md"],
+    }
+    required_block_fields = [
+        "- Checked: Yes",
+        "- Severity: High | Medium | Low | Info | None",
+        '- Finding: <finding or "No material findings">',
+        '- Evidence / Location: <files, functions, commands, or "N/A">',
+        '- Recommended Action: <action or "None">',
+        '- Verification: <test, command, review method, or "N/A">',
+        "## Skipped Engineering Areas",
+        "## Skipped AI System Areas",
+    ]
+    disallowed_finding_table_marker = (
+        "| Audit Area | Checked? | Severity | Finding |"
+    )
+    for relative_path, text in block_docs.items():
+        for field in required_block_fields:
+            if field not in text:
+                errors.append(f"{relative_path} missing audit block field: {field}")
+        if disallowed_finding_table_marker in text:
+            errors.append(f"{relative_path} still uses a findings table")
     return errors
 
 

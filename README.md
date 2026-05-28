@@ -58,11 +58,13 @@ Automation, deferrals, conflicts, or explicit requirements/status reporting.
 
 All modes pass through the Audit Scope Gate before findings, backlog, or patch
 selection. The agent should state selected and skipped audit areas and explain
-why they apply. `Engineering Audits Table` and `AI System Audits Table` are the
-canonical audit format and are mandatory for Review Mode, audit outputs,
-persistent backlog outputs, and run reports that include audit findings. A
+why they apply. Readable audit-area blocks are the canonical audit format and are
+mandatory for Review Mode, audit outputs, persistent backlog outputs, and run
+reports that include audit findings. Checked areas must appear even when there
+are no material findings, and skipped areas are listed separately with reasons.
+Tables may only be used for short metadata summaries, not detailed findings. A
 trivial Local Safe Refactor Mode patch can report the selected audit area and
-verification without printing full audit tables unless the user requested review
+verification without printing full audit blocks unless the user requested review
 or a backlog.
 
 ### 3. Paste a prompt
@@ -132,7 +134,7 @@ The agent should:
   showing it only when it materially affects the work or the user asks
 - make audit scope visible before findings, backlog, or patch selection
 - report Review Mode, audit, persistent backlog, and audit run-report findings
-  using the two required audit tables
+  using the required block-based audit format
 - characterize current behavior before medium/high-risk changes
 - keep each patch focused and small
 - verify locally after each patch

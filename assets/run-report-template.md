@@ -40,28 +40,53 @@ reporting.
 - New characterization added:
 - Manual checklist, if used:
 
-## Engineering Audits Table
+Engineering Audits: repeat one block for every checked Engineering area.
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-|  | Yes/No | High/Medium/Low/Info/None |  |  |  |  |
+## <Audit Area>
 
-## AI System Audits Table
+- Checked: Yes
+- Severity: High | Medium | Low | Info | None
+- Finding: <finding or "No material findings">
+- Evidence / Location: <files, functions, commands, or "N/A">
+- Recommended Action: <action or "None">
+- Verification: <test, command, review method, or "N/A">
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-|  | Yes/No | High/Medium/Low/Info/None |  |  |  |  |
+## Skipped Engineering Areas
 
-When this report includes audit findings, every known audit area should appear
-in the relevant table. Areas with no issues should say `No material findings`.
-Areas not checked should use `Checked? = No` and explain why. Use `N/A` only
-when the run report does not include audit findings.
+- <Audit Area>: <reason>
+
+AI System Audits: repeat one block for every checked AI System area.
+
+## <Audit Area>
+
+- Checked: Yes
+- Severity: High | Medium | Low | Info | None
+- Finding: <finding or "No material findings">
+- Evidence / Location: <files, functions, commands, or "N/A">
+- Recommended Action: <action or "None">
+- Verification: <test, command, review method, or "N/A">
+
+## Skipped AI System Areas
+
+- <Audit Area>: <reason>
+
+When this report includes audit findings, do not omit checked areas. Checked
+areas with no findings must still appear with `Severity: None` and
+`Finding: No material findings`. Skipped areas do not need full blocks. Tables
+may only be used for short metadata summaries, not detailed findings.
 
 ## Backlog
 
-| Priority | Audit Family | Audit Area | Severity | Risk | Finding | Proposed Patch | Verification |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |  |
+### P001
+
+- Priority:
+- Audit Family:
+- Audit Area:
+- Severity:
+- Risk:
+- Finding:
+- Proposed Patch:
+- Verification:
 
 ## Patch Applied
 

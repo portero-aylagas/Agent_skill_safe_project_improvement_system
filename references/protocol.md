@@ -99,7 +99,7 @@ Rules:
   user explicitly asks for requirements or status.
 - For trivial Local Safe Refactor Mode changes, the final response may summarize
   only must-have requirement status instead of showing the full ledger table.
-- In Review Mode, the ledger can be shown briefly before the audit tables when
+- In Review Mode, the ledger can be shown briefly before the audit blocks when
   it helps explain scope or constraints.
 - In Full Automation Mode, check the ledger again before commit, push, or pull
   request creation/update.
@@ -142,40 +142,64 @@ When reviewing software engineering quality, assess conformance to
 Group findings by audit family, then audit area, then severity. Do not return a
 single mixed severity list.
 
-The two audit tables below are the canonical audit/report format. They are
-mandatory for Review Mode, audit outputs, persistent backlog outputs, and run
-reports that include audit findings. Local Safe Refactor Mode does not need to
-print full two-table audits unless the user requested a review/audit, a backlog
-is produced, or patch selection depends on multiple audit areas. If only one
-focused patch is implemented, the agent may report the selected audit area and
-verification without printing every audit area table.
+Readable block-based audit reporting is the canonical audit/report format.
+Do not use wide Markdown tables for audit findings in chat responses or persisted
+Markdown reports. The block format is mandatory for Review Mode, audit outputs,
+persistent backlog outputs, and run reports that include audit findings. Local
+Safe Refactor Mode does not need to print full audit blocks unless the user
+requested a review/audit, a backlog is produced, or patch selection depends on
+multiple audit areas. If only one focused patch is implemented, the agent may
+report the selected audit area and verification without printing every checked
+audit area block.
 
-When the tables are required, include exactly two main findings tables in this
-order:
+For every checked `Engineering Audits` area, list one block:
 
-## Engineering Audits Table
+## <Audit Area>
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |
+- Checked: Yes
+- Severity: High | Medium | Low | Info | None
+- Finding: <finding or "No material findings">
+- Evidence / Location: <files, functions, commands, or "N/A">
+- Recommended Action: <action or "None">
+- Verification: <test, command, review method, or "N/A">
 
-## AI System Audits Table
+After all checked `Engineering Audits` areas, add:
 
-| Audit Area | Checked? | Severity | Finding | Evidence / Location | Recommended Action | Verification |
-| --- | --- | --- | --- | --- | --- | --- |
-|  |  |  |  |  |  |  |
+## Skipped Engineering Areas
+
+- <Audit Area>: <reason>
+
+For every checked `AI System Audits` area, list one block:
+
+## <Audit Area>
+
+- Checked: Yes
+- Severity: High | Medium | Low | Info | None
+- Finding: <finding or "No material findings">
+- Evidence / Location: <files, functions, commands, or "N/A">
+- Recommended Action: <action or "None">
+- Verification: <test, command, review method, or "N/A">
+
+After all checked `AI System Audits` areas, add:
+
+## Skipped AI System Areas
+
+- <Audit Area>: <reason>
 
 Rules:
 
-- Every known audit area must appear in the relevant table.
-- If an area was not checked, set `Checked?` to `No`, set `Severity` to `None`,
-  and explain why in `Finding`.
-- If an area was checked and has no material findings, set `Checked?` to `Yes`,
-  set `Severity` to `None`, and write `No material findings`.
+- Do not omit checked areas.
+- Checked areas with no findings must still appear with `Severity: None` and
+  `Finding: No material findings`.
+- Skipped areas do not need full blocks. List them only under the relevant
+  skipped-area section with a reason.
+- If no areas were skipped for a family, write
+  `- None: all relevant areas were checked`.
 - Use severity values consistently: `High`, `Medium`, `Low`, `Info`, or `None`.
+- Tables may only be used for short metadata summaries, not detailed findings.
 - Do not return only a free-text findings list. Brief narrative summaries are
-  allowed before or after the two main findings tables.
-- Backlog items should trace to table rows.
+  allowed before or after the audit blocks.
+- Backlog items should trace to audit blocks.
 
 ## Step 5: Backlog
 
@@ -220,7 +244,7 @@ For low-risk local patches, the final chat report is usually enough.
 
 Use when the user asks for audit, review, assessment, backlog, or planning.
 Pass through the Audit Scope Gate before producing findings or backlog items.
-Show the Requirements Ledger briefly before the two main audit tables when it
+Show the Requirements Ledger briefly before the audit blocks when it
 affects scope, constraints, deferrals, or approval boundaries.
 
 Always load:
